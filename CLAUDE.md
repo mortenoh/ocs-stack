@@ -64,6 +64,22 @@ Use `uv add` (and `uv add --dev`) so the latest version is picked up, and fix
 breaking API changes rather than pinning to an old version. Where a pin is
 genuinely forced, record the reason in a comment next to it.
 
+### Projects with infrastructure
+
+A project needing real services adds a `compose.yml` (plus a `Dockerfile` when
+the image needs more than an upstream one) and Makefile targets `up`, `down`,
+`ps`, `logs`, and any project-specific controls. `up` must block until the
+service is actually ready rather than returning on container start.
+
+The examples still have to run without it. `data/dask-distributed` is the
+reference: a `connect()` helper probes the service, falls back to an
+in-process substitute, and prints a note naming what was lost and how to start
+the real thing. Every example is verified both ways.
+
+Where a container and the host both take part, pin the image to the versions
+in `uv.lock` — a mismatch between a client library and its server is a whole
+class of confusing failures.
+
 ## Rules
 
 - **Never revert, always fix forward.**

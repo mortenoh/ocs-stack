@@ -1,0 +1,58 @@
+# A real dask cluster: one scheduler, three worker containers, one shared volume.
+#
+# The examples run on the HOST and connect in over tcp://127.0.0.1:8786, which
+# is what makes this different from a LocalCluster: work crosses a process and
+# network boundary, so everything must serialize and every path must be valid
+# on the worker.
+#
+#   make up          start the cluster
+#   make dashboard   open the scheduler dashboard
+#   make scale N=5   change the worker count while running
+#   make down        stop it and remove the volume
+
+services:
+  scheduler:
+    build: .
+    command: ["dask", "scheduler", "--host", "0.0.0.0", "--port", "8786", "--dashboard-address", ":8787"]
+    ports:
+      - "${DASK_SCHEDULER_PORT:-8786}:8786" # client connections
+      - "${DASK_DASHBOARD_PORT:-8787}:8787" # bokeh dashboard
+    volumes:
+      - shared:/data
+    healthcheck:
+      # The dashboard answering means the scheduler event loop is live, so
+      # `make up` can wait for readiness instead of racing the first connect.
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8787/health')"]
+      interval: 3s
+      timeout: 5s
+      retries: 20
+      start_period: 5s
+
+  worker:
+    build: .
+    command:
+      [
+        "dask",
+        "worker",
+        "tcp://scheduler:8786",
+        "--nworkers",
+        "1",
+        "--nthreads",
+        "2",
+        "--memory-limit",
+        "1.5GiB",
+        "--local-directory",
+        "/tmp/dask-worker-space",
+      ]
+    depends_on:
+      scheduler:
+        condition: service_healthy
+    deploy:
+      replicas: ${DASK_WORKERS:-3}
+    volumes:
+      - shared:/data
+
+volumes:
+  # Named rather than a bind mount: the examples write through the workers, so
+  # the host never needs to see these files directly.
+  shared:

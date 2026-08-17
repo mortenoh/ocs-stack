@@ -1,0 +1,13 @@
+.venv/
+examples/
+tests/
+docs/
+site/
+reports/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.pyright/
+__pycache__/
+*.pyc
+uv.lock
