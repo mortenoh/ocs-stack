@@ -362,6 +362,77 @@ big, splittable, and roughly balanced — and a liability when it is not.
 
 ---
 
+## Setup
+
+The project is self-contained: its own `pyproject.toml`, its own `.venv`, its
+own `uv.lock`. Nothing is installed at the repository level. What is different
+from every other project here is that this one also has containers, so there
+are two things to start rather than one.
+
+```bash
+cd dask-distributed
+make install                                 # uv sync
+make up                                      # build images, start scheduler + 3 workers
+make run EXAMPLE=0101_connect                # run one example
+make run-all                                 # all 15, in order
+make down                                    # stop the cluster
+```
+
+`make up` does not return when the containers start — it returns when the
+scheduler actually answers on port 8786, by polling it through
+`wait_for_scheduler`. A target that returns on container start is a target that
+hands the next command a cluster that is not ready yet.
+
+The rest of the targets, in the order you tend to need them:
+
+| Target | What it does |
+|---|---|
+| `make ps` | container status |
+| `make logs` | follow scheduler and worker logs |
+| `make dashboard` | open <http://127.0.0.1:8787/status> |
+| `make scale N=5` | change the worker count while running |
+| `make restart` | recreate the containers, keeping images |
+| `make test` / `make lint` / `make ci` | the same as every other project |
+
+### Running without Docker
+
+**Every example runs with the cluster down.** `connect()` probes the scheduler,
+falls back to an in-process `LocalCluster`, and says so rather than pretending:
+
+```text
+Compose cluster not reachable at tcp://127.0.0.1:8799 -- fell back to an
+in-process LocalCluster (inproc://<host>/42246/1).
+  Start the real thing with: make up
+```
+
+(Captured with `DASK_SCHEDULER_ADDRESS` pointed at a port nothing was listening
+on, since the cluster was up at the time; the host in the `inproc://` address
+is elided. Everything else is verbatim.)
+
+That fallback is a genuine substitute for perhaps half of what is on this page
+and a poor one for the rest — a `LocalCluster` cannot show you a serialization
+failure across a process boundary, a worker filesystem that differs from the
+client's, or a container being killed mid-computation. The four things it
+hides get their own section [below](#the-four-things-a-localcluster-hides), and
+[the fallback design](#the-fallback-design-in-clusterpy) explains how it works.
+
+Point the examples at a cluster somewhere else by setting the address:
+
+```bash
+DASK_SCHEDULER_ADDRESS=tcp://10.0.0.4:8786 make run EXAMPLE=0101_connect
+```
+
+### Pinning the image to the lockfile
+
+The container image installs from the same `uv.lock` the host does. This is not
+tidiness: a client and a worker running different library versions is a whole
+class of confusing failures, and the base image was one patch behind on numpy
+until this was fixed. [`0102_versions.py`](../../dask-distributed/examples/0102_versions.py)
+checks it at runtime and is the example to run first when something behaves
+inexplicably.
+
+---
+
 ## The cluster in this project
 
 The whole cluster is two files — [`compose.yml`](../../dask-distributed/compose.yml)

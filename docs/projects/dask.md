@@ -12,39 +12,6 @@ backed by a number the example prints.
 
 ---
 
-## Table of contents
-
-- [Introduction to dask](#introduction-to-dask)
-  - [The problem dask solves](#the-problem-dask-solves)
-  - [The task graph mental model](#the-task-graph-mental-model)
-  - [Lazy versus eager](#lazy-versus-eager)
-  - [dask.array and numpy](#daskarray-and-numpy)
-  - [dask.dataframe and pandas](#daskdataframe-and-pandas)
-  - [Collections versus futures](#collections-versus-futures)
-  - [When dask is the wrong tool](#when-dask-is-the-wrong-tool)
-  - [Reading the official documentation](#reading-the-official-documentation)
-- [Setup](#setup)
-- [Core concepts](#core-concepts)
-  - [Task graphs](#task-graphs)
-  - [Delayed](#delayed)
-  - [Chunks](#chunks)
-  - [Blocked algorithms](#blocked-algorithms)
-  - [Schedulers](#schedulers)
-  - [The GIL](#the-gil)
-- [Phase 1 — Delayed and task graphs](#phase-1-delayed-and-task-graphs)
-- [Phase 2 — dask.array](#phase-2-daskarray)
-- [Phase 3 — Schedulers and distributed](#phase-3-schedulers-and-distributed)
-- [Phase 4 — dask.dataframe](#phase-4-daskdataframe)
-- [Phase 5 — Dask-backed xarray](#phase-5-dask-backed-xarray)
-- [Phase 6 — Patterns and pitfalls](#phase-6-patterns-and-pitfalls)
-- [Chunking: the deep section](#chunking-the-deep-section)
-- [Pitfalls and gotchas](#pitfalls-and-gotchas)
-- [How this maps to open-climate-service](#how-this-maps-to-open-climate-service)
-- [Where to go next](#where-to-go-next)
-- [Further reading](#further-reading)
-
----
-
 ## Introduction to dask
 
 This section assumes you have never used dask. It is long on purpose: almost

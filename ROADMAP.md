@@ -6,8 +6,8 @@ what is open across the collection rather than inside one project.
 
 ## Open from the review of 2026-08-17
 
-None of these break anything. They are decisions left deliberately unmade
-rather than work half done.
+Two items need a decision that is not mine to make. The three documentation
+inconsistencies the review found are fixed.
 
 - [ ] **The directory is still named `playground-python` on disk.** The
       contents were renamed to `climate-stack`; the folder was not, because
@@ -17,18 +17,16 @@ rather than work half done.
 - [ ] **No git remote is configured.** Every project page links to source with
       repository-relative paths, which resolve in an editor and would resolve
       on GitHub. They have nowhere to resolve to yet.
-- [ ] **`dask-distributed` is the one project page without a `Setup`
-      section.** `CLAUDE.md` fixes the section order and puts Setup third; that
-      page puts the same content under *The cluster in this project → The
-      Makefile targets*, which is arguably the better place for a project whose
-      setup is a Compose file. Decide once: move it, or amend the required
-      order in `CLAUDE.md` to allow this. Do not leave it as drift.
-- [ ] **`climate-pipeline` writes its phase headings as `Phase 1 -- Ingest`**
-      where the other four use an em dash.
-- [ ] **`dask` and `icechunk` open with a hand-maintained contents list** that
-      the other three pages do not have. The site has a sidebar and the offline
-      book builds its own table of contents, so these are now maintained by
-      hand for no reader. Drop them, or add them to all five.
+- [x] **`dask-distributed` had no `Setup` section**, the only project page
+      missing one. It now has a real one in the position `CLAUDE.md` requires,
+      covering the two-step start, the fallback with the cluster down, and the
+      lockfile pin — with the deep Compose walkthrough left where it was.
+- [x] **`climate-pipeline` wrote its phase headings as `Phase 1 -- Ingest`.**
+      All 26 headings now use the em dash the other four pages use. Prose was
+      left alone.
+- [x] **`dask` and `icechunk` opened with a hand-maintained contents list.**
+      Removed: the site has a sidebar and the offline book builds its own table
+      of contents, so both lists were maintained by hand for no reader.
 
 ## Groundwork laid, work not started
 

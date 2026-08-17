@@ -716,7 +716,7 @@ from climate_stack_climate_pipeline import (
 
 Twenty-one names. That is the whole service.
 
-### `sources.py` -- deliberately messy inputs
+### `sources.py` — deliberately messy inputs
 
 Source: [`../../climate-pipeline/src/climate_stack_climate_pipeline/sources.py`](../../climate-pipeline/src/climate_stack_climate_pipeline/sources.py)
 
@@ -821,7 +821,7 @@ what to actually fetch, in what order, and how many times to retry -- which is
 exactly the separation that lets `ingest()` implement resume without the source
 knowing anything about it.
 
-#### `_period_seed` -- the determinism trap
+#### `_period_seed` — the determinism trap
 
 This is a five-line private function that deserves a full section, because the
 bug it avoids is one of the most confusing in Python.
@@ -1000,7 +1000,7 @@ a heavy day's rain. Same value, 1000x apart.
 
 ---
 
-### `normalize.py` -- one convention, bought once
+### `normalize.py` — one convention, bought once
 
 Source: [`../../climate-pipeline/src/climate_stack_climate_pipeline/normalize.py`](../../climate-pipeline/src/climate_stack_climate_pipeline/normalize.py)
 
@@ -1314,7 +1314,7 @@ Aliases work too:
 
 ---
 
-### `ingest.py` -- one period, one commit
+### `ingest.py` — one period, one commit
 
 Source: [`../../climate-pipeline/src/climate_stack_climate_pipeline/ingest.py`](../../climate-pipeline/src/climate_stack_climate_pipeline/ingest.py)
 
@@ -1685,7 +1685,7 @@ metadata at this scale rather than by the arrays.
 
 ---
 
-### `indices.py` -- the products people actually ask for
+### `indices.py` — the products people actually ask for
 
 Source: [`../../climate-pipeline/src/climate_stack_climate_pipeline/indices.py`](../../climate-pipeline/src/climate_stack_climate_pipeline/indices.py)
 
@@ -2068,7 +2068,7 @@ wants a specific day.
 
 ---
 
-### `publish.py` -- turning a store into a product
+### `publish.py` — turning a store into a product
 
 Source: [`../../climate-pipeline/src/climate_stack_climate_pipeline/publish.py`](../../climate-pipeline/src/climate_stack_climate_pipeline/publish.py)
 
@@ -2424,13 +2424,13 @@ served from, which this project does not know because it has no HTTP layer.
 
 ---
 
-## Phase 1 -- Ingest
+## Phase 1 — Ingest
 
 Three examples covering the left half of the pipeline: what a source hands
 over, what normalization does to it, how it lands in the store, and what
 happens when the run does not finish.
 
-### `0101_normalize` -- what is wrong with a raw source
+### `0101_normalize` — what is wrong with a raw source
 
 Source: [`../../climate-pipeline/examples/0101_normalize.py`](../../climate-pipeline/examples/0101_normalize.py)
 
@@ -2566,7 +2566,7 @@ project's synthetic sources have no missing data, so it does not have one.
 
 ---
 
-### `0102_streaming_ingest` -- one period, one commit
+### `0102_streaming_ingest` — one period, one commit
 
 Source: [`../../climate-pipeline/examples/0102_streaming_ingest.py`](../../climate-pipeline/examples/0102_streaming_ingest.py)
 
@@ -2716,7 +2716,7 @@ but printing it fifty times during a demonstration teaches nothing.
 
 ---
 
-### `0103_resume` -- let the store tell you where to restart
+### `0103_resume` — let the store tell you where to restart
 
 Source: [`../../climate-pipeline/examples/0103_resume.py`](../../climate-pipeline/examples/0103_resume.py)
 
@@ -2854,12 +2854,12 @@ should check `report.failed` and alert on it.
 
 ---
 
-## Phase 2 -- Derive
+## Phase 2 — Derive
 
 Three examples on the middle of the pipeline: turning a stored daily series
 into the products people ask for.
 
-### `0201_climatology` -- normals and anomalies
+### `0201_climatology` — normals and anomalies
 
 Source: [`../../climate-pipeline/examples/0201_climatology.py`](../../climate-pipeline/examples/0201_climatology.py)
 
@@ -3024,7 +3024,7 @@ about whether the underlying values are right.
 
 ---
 
-### `0202_indices` -- the products a user asks for
+### `0202_indices` — the products a user asks for
 
 Source: [`../../climate-pipeline/examples/0202_indices.py`](../../climate-pipeline/examples/0202_indices.py)
 
@@ -3289,7 +3289,7 @@ whole series by a month.
 
 ---
 
-### `0203_pyramid` -- multiscale levels, and why a viewer needs them
+### `0203_pyramid` — multiscale levels, and why a viewer needs them
 
 Source: [`../../climate-pipeline/examples/0203_pyramid.py`](../../climate-pipeline/examples/0203_pyramid.py)
 
@@ -3446,12 +3446,12 @@ a power of two before building the pyramid is the usual answer.
 
 ---
 
-## Phase 3 -- Publish
+## Phase 3 — Publish
 
 Two examples on the right-hand end of the pipeline: making the store placeable
 and making it discoverable.
 
-### `0301_geozarr` -- putting a grid of numbers somewhere on Earth
+### `0301_geozarr` — putting a grid of numbers somewhere on Earth
 
 Source: [`../../climate-pipeline/examples/0301_geozarr.py`](../../climate-pipeline/examples/0301_geozarr.py)
 
@@ -3645,7 +3645,7 @@ and not correct in general.
 
 ---
 
-### `0302_stac` -- the document a client discovers the dataset through
+### `0302_stac` — the document a client discovers the dataset through
 
 Source: [`../../climate-pipeline/examples/0302_stac.py`](../../climate-pipeline/examples/0302_stac.py)
 
@@ -3813,11 +3813,11 @@ tracks the version it emits against the version it claims.
 
 ---
 
-## Phase 4 -- The whole thing
+## Phase 4 — The whole thing
 
 Two examples that stop taking stages apart and run them together.
 
-### `0401_full_pipeline` -- source to product in one pass
+### `0401_full_pipeline` — source to product in one pass
 
 Source: [`../../climate-pipeline/examples/0401_full_pipeline.py`](../../climate-pipeline/examples/0401_full_pipeline.py)
 
@@ -3910,7 +3910,7 @@ one that shows the pipeline is not secretly specialized.
 
 ---
 
-### `0402_second_dataset` -- what generalizes, and what must not
+### `0402_second_dataset` — what generalizes, and what must not
 
 Source: [`../../climate-pipeline/examples/0402_second_dataset.py`](../../climate-pipeline/examples/0402_second_dataset.py)
 
@@ -4110,7 +4110,7 @@ make run EXAMPLE=0401_full_pipeline
 
 About a second on the machine behind this page -- **machine-dependent**.
 
-### Stage 1 -- the source
+### Stage 1 — the source
 
 ```text
 ==========================================================================
@@ -4146,7 +4146,7 @@ from `zlib.crc32` rather than `hash`; xarray for wrapping the result into a
 February rather than 28 or 30. Those numbers are what make stage 2's chunk
 alignment necessary.
 
-### Stage 2 -- ingest
+### Stage 2 — ingest
 
 ```text
 ==========================================================================
@@ -4201,7 +4201,7 @@ The full encoding, for reference:
 `chunks` is the *store's* chunk shape and never changes; `chunksizes` is the
 dask graph's view and includes the partial final chunk.
 
-### Stage 3 -- the history
+### Stage 3 — the history
 
 ```text
 ==========================================================================
@@ -4253,7 +4253,7 @@ snapshot id alongside the figure and you can regenerate it exactly, however much
 the series has grown. Without per-period commits there would be nothing to
 record.
 
-### Stage 4 -- derive
+### Stage 4 — derive
 
 ```text
 ==========================================================================
@@ -4302,7 +4302,7 @@ Note also that the two outputs have different dimension names -- `month` for the
 normal, `time` for the index -- which is xarray being honest about what each one
 is. The normal is not a time series; the index is.
 
-### Stage 5 -- the pyramid
+### Stage 5 — the pyramid
 
 ```text
 ==========================================================================
@@ -4341,7 +4341,7 @@ dimension is not a power of two, `boundary="trim"` drops cells at each level and
 the area mean does drift slightly -- because a different set of cells is being
 averaged.
 
-### Stage 6 -- publish
+### Stage 6 — publish
 
 ```text
 ==========================================================================

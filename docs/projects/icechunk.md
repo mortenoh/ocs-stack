@@ -12,27 +12,6 @@ no credentials and no cloud account.
 
 ---
 
-## Contents
-
-- [Introduction to icechunk](#introduction-to-icechunk) — the problem, the model,
-  and what icechunk does not do
-- [Setup](#setup) — commands and the shared helpers
-- [Core concepts](#core-concepts) — repository, session, commit, branch, tag,
-  ancestry, conflict, expiry
-- [Phase 1 — Repositories, sessions, commits](#phase-1-repositories-sessions-commits)
-- [Phase 2 — Time travel](#phase-2-time-travel)
-- [Phase 3 — Transactions and safety](#phase-3-transactions-and-safety)
-- [Phase 4 — The OCS ingest pattern](#phase-4-the-ocs-ingest-pattern)
-- [Phase 5 — Operations](#phase-5-operations)
-- [What is actually on disk](#what-is-actually-on-disk)
-- [Storage backends](#storage-backends)
-- [Pitfalls and gotchas](#pitfalls-and-gotchas)
-- [How this maps to open-climate-service](#how-this-maps-to-open-climate-service)
-- [Where to go next](#where-to-go-next)
-- [Further reading](#further-reading)
-
----
-
 ## Introduction to icechunk
 
 ### The shape of the problem
