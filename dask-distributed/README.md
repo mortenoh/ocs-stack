@@ -34,7 +34,6 @@ make install                  # uv sync
 make run EXAMPLE=0101_connect
 make run-all                  # run every example
 make lint test                # ruff + mypy + pyright, pytest
-make docs-serve               # mkdocs at http://127.0.0.1:8000
 ```
 
 ## Version matching
@@ -43,3 +42,6 @@ make docs-serve               # mkdocs at http://127.0.0.1:8000
 uses. Mismatched versions between client and workers are the most common cause
 of confusing distributed failures — bump the image tag and the `pyproject.toml`
 floors together.
+
+Full documentation: [`docs/projects/dask-distributed.md`](../docs/projects/dask-distributed.md)
+(`make docs-serve` at the repository root renders the whole site).

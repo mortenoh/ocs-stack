@@ -10,16 +10,15 @@ bottom up, so that extending it — S3-backed icechunk, a distributed dask
 deployment — means applying things already understood rather than learning
 them under pressure.
 
-| Project | Examples | What it covers |
-|---|---:|---|
-| [`start`](start/) | 1 | The template itself: uv, src layout, ruff, mypy, pyright, pytest |
-| [`xarray`](xarray/) | 25 | Labeled N-dimensional arrays: the data model through to lazy evaluation |
-| [`dask`](dask/) | 22 | Task graphs, blocked algorithms, schedulers, and chunking in practice |
-| [`dask-distributed`](dask-distributed/) | 15 | A real cluster: scheduler and workers in containers, driven from the host |
-| [`icechunk`](icechunk/) | 14 | Versioned, transactional Zarr v3 storage |
-| [`climate`](climate/) | 10 | The capstone: a miniature climate service, end to end |
+| Project | Examples | Upstream | What it covers |
+|---|---:|---|---|
+| [`xarray`](xarray/) | 25 | [xarray](https://docs.xarray.dev/) | Labeled N-dimensional arrays: the data model through to lazy evaluation |
+| [`dask`](dask/) | 22 | [dask](https://docs.dask.org/) | Task graphs, blocked algorithms, schedulers, and chunking in practice |
+| [`dask-distributed`](dask-distributed/) | 15 | [dask.distributed](https://distributed.dask.org/) | A real cluster: scheduler and workers in containers, driven from the host |
+| [`icechunk`](icechunk/) | 14 | [icechunk](https://icechunk.io/) | Versioned, transactional Zarr v3 storage |
+| [`climate-pipeline`](climate-pipeline/) | 10 | [open-climate-service](https://github.com/dhis2/open-climate-service) | The capstone: a miniature climate service, end to end |
 
-87 examples in total, each a self-contained lesson that prints its own
+86 examples in total, each a self-contained lesson that prints its own
 explanation as it runs.
 
 ```bash
@@ -47,5 +46,5 @@ reference.
 - **[Conventions](docs/conventions.md)** — how projects are built and verified
 
 New here? Read [the stack](docs/stack.md), then run
-`make run EXAMPLE=0401_full_pipeline` in [`climate/`](climate/) to see every
+`make run EXAMPLE=0401_full_pipeline` in [`climate-pipeline/`](climate-pipeline/) to see every
 layer working together in about a second.

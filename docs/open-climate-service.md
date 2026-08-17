@@ -8,13 +8,13 @@ because OCS depends on it.
 
 | OCS does this | Learn it here |
 |---|---|
-| Normalizes every source to `(time, y, x)`, Kelvin to Celsius | `climate/examples/0101_normalize.py` |
+| Normalizes every source to `(time, y, x)`, Kelvin to Celsius | `climate-pipeline/examples/0101_normalize.py` |
 | Ingests one period at a time, committing each | `icechunk/examples/0401_append_periods.py` |
 | Resumes an interrupted ingest from committed time steps | `icechunk/examples/0402_resume.py` |
 | Builds multiscale pyramids by mean downsampling | `xarray/examples/0305_rolling_coarsen.py` |
 | Rechunks to Zarr-legal uniform chunks before writing | `dask/examples/0601_zarr_legal_chunks.py` |
-| Writes GeoZarr root attributes so clients can place the grid | `climate/examples/0301_geozarr.py` |
-| Publishes a STAC collection per dataset | `climate/examples/0302_stac.py` |
+| Writes GeoZarr root attributes so clients can place the grid | `climate-pipeline/examples/0301_geozarr.py` |
+| Publishes a STAC collection per dataset | `climate-pipeline/examples/0302_stac.py` |
 | Runs openEO process graphs on dask | `dask/` phases 1–3 |
 
 Two things here are deliberate re-implementations of OCS code, kept close to
@@ -22,7 +22,7 @@ the original: the `_uniform_chunks` fix in
 `dask/examples/0601_zarr_legal_chunks.py`, and the open-or-create plus
 commit-and-append pattern in `icechunk/src/playground_icechunk/helpers.py`.
 
-The [climate](projects/climate.md) project is the whole shape in miniature — a
+The [climate-pipeline](projects/climate-pipeline.md) project is the whole shape in miniature — a
 messy source normalized, ingested as one commit per period, derived into
 climatologies and indices, and published with GeoZarr attributes and a STAC
 collection whose extents are read back off the store rather than declared. Run
@@ -83,7 +83,7 @@ outright once the final chunk is partial:
 > `ValueError: Specified Zarr chunks encoding['chunks']=(30, 32, 32) for
 > variable named 't2m' would overlap multiple Dask chunks`
 
-It is not a corner case — it appeared independently in the `climate` and
+It is not a corner case — it appeared independently in the `climate-pipeline` and
 `icechunk` projects, on the same period, the fifth month in both. The fix is
 `align_chunks=True` on the append, and both projects demonstrate it rather than
 working around it (`icechunk/examples/0401_append_periods.py` probes each

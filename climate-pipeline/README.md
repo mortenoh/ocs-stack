@@ -21,7 +21,9 @@ make install                          # uv sync
 make run EXAMPLE=0401_full_pipeline   # the whole pipeline in one run
 make run-all                          # every example
 make lint test                        # ruff + mypy + pyright, pytest
-make docs-serve                       # mkdocs at http://127.0.0.1:8000
 ```
 
 See `ROADMAP.md` for the syllabus.
+
+Full documentation: [`docs/projects/climate-pipeline.md`](../docs/projects/climate-pipeline.md)
+(`make docs-serve` at the repository root renders the whole site).

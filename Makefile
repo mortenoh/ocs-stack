@@ -16,7 +16,7 @@ MKDOCS := NO_MKDOCS_2_WARNING=1 uvx --quiet \
 	--with 'mkdocstrings[python]' \
 	mkdocs
 
-.PHONY: help list verify verify-all docs docs-serve docs-build clean
+.PHONY: help list verify verify-all docs docs-serve docs-build docs-links clean
 
 help: ## Show this help
 	@echo "Targets:"
@@ -45,6 +45,10 @@ docs-serve: ## Serve the documentation site with live reload
 docs-build: ## Build the documentation site into site/
 	@echo ">>> Building documentation site"
 	@$(MKDOCS) build
+	@$(MAKE) --no-print-directory docs-links
+
+docs-links: ## Check that every relative link in docs/ resolves
+	@./scripts/check-links.sh
 
 docs: docs-serve
 

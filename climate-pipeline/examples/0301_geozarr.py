@@ -24,7 +24,7 @@ import numpy as np
 import xarray as xr
 import zarr
 
-from playground_climate import (
+from playground_climate_pipeline import (
     bounding_box,
     enumerate_periods,
     fetch_temperature,

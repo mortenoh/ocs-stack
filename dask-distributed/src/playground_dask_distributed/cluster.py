@@ -170,10 +170,12 @@ def connect(address: str = SCHEDULER_ADDRESS, *, allow_fallback: bool = True) ->
         n_workers=FALLBACK_WORKERS,
         threads_per_worker=2,
         processes=False,
-        # No dashboard for the fallback: it is a stand-in, and binding a port
-        # would fail on a machine already running the real cluster. The stub
-        # types this as str, but None is the documented "off" value.
-        dashboard_address=None,  # pyright: ignore[reportArgumentType]
+        # Bind the fallback dashboard to an ephemeral port. Neither None nor
+        # False switches it off -- distributed starts one regardless, tries the
+        # default 8787, and on a machine already running the real cluster warns
+        # "Port 8787 is already in use" before picking another. ":0" asks for a
+        # free port up front, which is quiet and never collides.
+        dashboard_address=":0",
     )
     client = Client(cluster)
     return ClusterSession(client=client, mode="local", address=str(cluster.scheduler_address))

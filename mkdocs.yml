@@ -35,19 +35,29 @@ nav:
       - Open Climate Service: open-climate-service.md
       - Conventions: conventions.md
   - Projects:
-      - start: projects/start.md
       - xarray: projects/xarray.md
       - dask: projects/dask.md
       - dask-distributed: projects/dask-distributed.md
       - icechunk: projects/icechunk.md
-      - climate: projects/climate.md
+      - climate-pipeline: projects/climate-pipeline.md
   - API reference:
-      - start: reference/start.md
       - xarray: reference/xarray.md
       - dask: reference/dask.md
       - dask-distributed: reference/dask-distributed.md
       - icechunk: reference/icechunk.md
-      - climate: reference/climate.md
+      - climate-pipeline: reference/climate-pipeline.md
+
+# The project pages link to example and library source with paths relative to
+# the repository root, so they resolve on GitHub and in an editor -- the way
+# these files are usually read. mkdocs cannot follow a link outside docs_dir
+# and would warn on every one, so that check is off here; a script in
+# scripts/check-links.sh validates the same links against the filesystem.
+# Anchors are still validated, and absolute links still warn.
+validation:
+  links:
+    not_found: ignore
+    anchors: warn
+    absolute_links: warn
 
 markdown_extensions:
   - admonition
@@ -79,12 +89,11 @@ plugins:
           # the projects' dependencies installed -- no root virtualenv, no
           # workspace, nothing to keep in sync.
           paths:
-            - start/src
             - xarray/src
             - dask/src
             - dask-distributed/src
             - icechunk/src
-            - climate/src
+            - climate-pipeline/src
           options:
             docstring_style: google
             show_source: true

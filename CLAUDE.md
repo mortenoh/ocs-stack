@@ -32,11 +32,36 @@ one mkdocs site from the root `mkdocs.yml`. Projects do NOT have their own
 
 - Long-form pages live in `docs/`: `index`, `stack`, `scaling`, `storage`,
   `open-climate-service`, `conventions`.
-- `docs/projects/<name>.md` summarises each project and mirrors its roadmap.
 - `docs/reference/<name>.md` is an mkdocstrings stub per project.
 - Projects keep their own `README.md` and `ROADMAP.md` — working files that
   render fine on their own. Keep the roadmap accurate as examples land.
 - Write markdown that reads well as a plain file, not only when rendered.
+
+### What a project page must be
+
+`docs/projects/<name>.md` is **the** documentation for that library: a
+teaching text someone can read start to finish and come away able to use the
+thing. Target 3000-4000 lines. It is NOT a summary, NOT an index, and NOT a
+reformatted `ROADMAP.md` — a page that lists example filenames with one-line
+descriptions is a failure, however tidy it looks.
+
+Every project page contains, in this order:
+
+1. What the project is, in a paragraph.
+2. **A real introduction to the technology itself** — several hundred lines.
+   What problem it solves, the mental model, how it relates to what the reader
+   already knows, and when not to use it. Assume no prior exposure.
+3. Setup: how to install and run it here.
+4. Core concepts, each with runnable code, its real output, and its pitfalls.
+5. Every example covered in depth — 80-200 lines each — with key code
+   extracted from the file, real output, why it matters, and the traps. Link to
+   the source file.
+6. A consolidated pitfalls section.
+7. How it maps to open-climate-service.
+8. Where to go next, and **links to the upstream project's own docs**.
+
+Non-negotiable: read every example before writing about it, run the ones you
+quote, and never invent output.
 
 `make docs-build` / `make docs-serve` at the root run mkdocs through `uvx`, so
 no root virtualenv exists and none is needed: mkdocstrings reads each project's
@@ -69,7 +94,7 @@ page in `docs/projects/` and `docs/reference/`.
 `.DEFAULT_GOAL := help`, exposing at least: `install` (uv sync), `lint`
 (ruff format + ruff check --fix + mypy + pyright), `test`, `coverage`,
 `run EXAMPLE=<name>`, `run-all`, `clean`, and `ci` (lint + test). Copy
-`start/Makefile` as the baseline. Docs targets belong to the root Makefile,
+`xarray/Makefile` as the baseline. Docs targets belong to the root Makefile,
 not to projects.
 
 ### Dependencies

@@ -14,8 +14,8 @@ Run: make run EXAMPLE=0101_normalize
 
 import xarray as xr
 
-from playground_climate import fetch_precipitation, fetch_temperature, normalize
-from playground_climate.sources import Period, enumerate_periods
+from playground_climate_pipeline import fetch_precipitation, fetch_temperature, normalize
+from playground_climate_pipeline.sources import Period, enumerate_periods
 
 
 def describe(ds: xr.Dataset, variable: str, label: str) -> None:

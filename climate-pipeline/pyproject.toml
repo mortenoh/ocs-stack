@@ -1,15 +1,23 @@
 [project]
-name = "playground-start"
+name = "playground-climate-pipeline"
 version = "0.1.0"
-description = "Starter project verifying the playground-python template"
+description = "A miniature climate service: ingest, store, derive, publish"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "dask[array,diagnostics]>=2026.7.1",
+    "icechunk>=2.1.2",
+    "netcdf4>=1.7.4",
+    "scipy>=1.18.0",
+    "xarray>=2026.7.0",
+    "zarr>=3.3.0",
+]
 
 [dependency-groups]
 dev = [
     "coverage>=7.15.4",
     "mypy>=2.3.1",
+    "pandas-stubs>=3.0.5.260730",
     "pyright>=1.1.411",
     "pytest>=9.1.1",
     "pytest-cov>=7.1.0",
@@ -21,7 +29,7 @@ requires = ["uv_build>=0.9.0,<0.13.0"]
 build-backend = "uv_build"
 
 [tool.uv.build-backend]
-module-name = "playground_start"
+module-name = "playground_climate_pipeline"
 
 [tool.ruff]
 target-version = "py313"
@@ -41,13 +49,6 @@ convention = "google"
 "src/**/*.py" = ["D102", "D105", "D107"]
 "examples/**/*.py" = []
 
-[tool.ruff.format]
-quote-style = "double"
-indent-style = "space"
-skip-magic-trailing-comma = false
-docstring-code-format = true
-docstring-code-line-length = "dynamic"
-
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 norecursedirs = ["examples", ".git", ".venv", "__pycache__"]
@@ -55,7 +56,7 @@ norecursedirs = ["examples", ".git", ".venv", "__pycache__"]
 [tool.coverage.run]
 branch = true
 relative_files = true
-source = ["playground_start"]
+source = ["playground_climate_pipeline"]
 
 [tool.coverage.report]
 exclude_also = ["if TYPE_CHECKING:"]

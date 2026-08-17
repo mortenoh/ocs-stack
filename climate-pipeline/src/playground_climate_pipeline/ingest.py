@@ -16,8 +16,8 @@ from typing import Any
 import pandas as pd
 import xarray as xr
 
-from playground_climate.normalize import normalize
-from playground_climate.sources import Period
+from playground_climate_pipeline.normalize import normalize
+from playground_climate_pipeline.sources import Period
 
 # The chunk sizes a country-scale daily dataset wants: about a month of time
 # per chunk, and spatial chunks capped so a map tile is one or two reads.

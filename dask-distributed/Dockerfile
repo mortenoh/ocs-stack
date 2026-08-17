@@ -13,7 +13,7 @@ FROM ghcr.io/dask/dask:2026.7.1-py3.13
 # Pinned to the exact versions in uv.lock on the client side. numpy and
 # tornado are pinned even though the base image ships them: its versions are a
 # patch behind the client's, which is enough for distributed to raise a
-# VersionMismatchWarning on every connect. Run `make versions` to compare.
+# VersionMismatchWarning on every connect. Example 0102 prints the comparison table.
 RUN pip install --no-cache-dir \
     "xarray==2026.7.0" \
     "zarr==3.3.0" \

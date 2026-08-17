@@ -22,17 +22,16 @@ Inside a project: `make install`, `make lint`, `make test`, `make run-all`,
 
 ## The projects
 
-| Project | Examples | What it covers |
-|---|---:|---|
-| [start](projects/start.md) | 1 | The template itself: uv, src layout, ruff, mypy, pyright, pytest |
-| [xarray](projects/xarray.md) | 25 | Labeled N-dimensional arrays: the data model through to lazy evaluation |
-| [dask](projects/dask.md) | 22 | Task graphs, blocked algorithms, schedulers, and chunking in practice |
-| [dask-distributed](projects/dask-distributed.md) | 15 | A real cluster: scheduler and workers in containers, driven from the host |
-| [icechunk](projects/icechunk.md) | 14 | Versioned, transactional Zarr v3 storage |
-| [climate](projects/climate.md) | 10 | The capstone: a miniature climate service, end to end |
+| Project | Examples | Upstream | What it covers |
+|---|---:|---|---|
+| [xarray](projects/xarray.md) | 25 | [xarray](https://docs.xarray.dev/) | Labeled N-dimensional arrays: the data model through to lazy evaluation |
+| [dask](projects/dask.md) | 22 | [dask](https://docs.dask.org/) | Task graphs, blocked algorithms, schedulers, and chunking in practice |
+| [dask-distributed](projects/dask-distributed.md) | 15 | [dask.distributed](https://distributed.dask.org/) | A real cluster: scheduler and workers in containers, driven from the host |
+| [icechunk](projects/icechunk.md) | 14 | [icechunk](https://icechunk.io/) | Versioned, transactional Zarr v3 storage |
+| [climate-pipeline](projects/climate-pipeline.md) | 10 | [open-climate-service](https://github.com/dhis2/open-climate-service) | The capstone: a miniature climate service, end to end |
 
 Each project's `ROADMAP.md` is the syllabus; each example is a self-contained
-lesson that prints its own explanation as it runs. 87 examples in total, and
+lesson that prints its own explanation as it runs. 86 examples in total, and
 `make verify-all` runs every one of them.
 
 ## Where to start
@@ -46,7 +45,7 @@ project the phases in `ROADMAP.md` build on each other — examples are numbered
 `PPNN`, where `PP` is the phase.
 
 **To see the whole thing working first**, run
-`make run EXAMPLE=0401_full_pipeline` in `climate/`. It takes about a second
+`make run EXAMPLE=0401_full_pipeline` in `climate-pipeline/`. It takes about a second
 and prints six labelled stages from raw source to published STAC collection.
 Then read backwards into whichever stage you want to understand.
 

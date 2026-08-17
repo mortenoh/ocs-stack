@@ -24,7 +24,7 @@ import numpy as np
 import pandas as pd
 import xarray as xr
 
-from playground_climate import (
+from playground_climate_pipeline import (
     Period,
     enumerate_periods,
     fetch_precipitation,
