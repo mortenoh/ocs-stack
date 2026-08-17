@@ -4,18 +4,20 @@ site_description: "Learning the xarray, dask, and icechunk stack behind open-cli
 theme:
   name: material
   palette:
-    - scheme: default
-      primary: teal
-      accent: teal
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
+    # Dark first, so that is what a visitor gets by default. The light scheme
+    # stays available behind the toggle.
     - scheme: slate
-      primary: teal
-      accent: teal
+      primary: indigo
+      accent: blue
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
+    - scheme: default
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
   features:
     - navigation.sections
     - navigation.top
