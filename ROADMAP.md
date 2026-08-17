@@ -1,0 +1,74 @@
+# Roadmap
+
+Each project has its own `ROADMAP.md`, which is the syllabus for that library
+and is kept accurate as examples land. This file is the repository-level one:
+what is open across the collection rather than inside one project.
+
+## Open from the review of 2026-08-17
+
+None of these break anything. They are decisions left deliberately unmade
+rather than work half done.
+
+- [ ] **The directory is still named `playground-python` on disk.** The
+      contents were renamed to `climate-stack`; the folder was not, because
+      moving it out from under a running session breaks every open path.
+      `mv ~/dev/mortenoh/playground-python ~/dev/mortenoh/climate-stack`.
+      Nothing inside the repository depends on the name.
+- [ ] **No git remote is configured.** Every project page links to source with
+      repository-relative paths, which resolve in an editor and would resolve
+      on GitHub. They have nowhere to resolve to yet.
+- [ ] **`dask-distributed` is the one project page without a `Setup`
+      section.** `CLAUDE.md` fixes the section order and puts Setup third; that
+      page puts the same content under *The cluster in this project → The
+      Makefile targets*, which is arguably the better place for a project whose
+      setup is a Compose file. Decide once: move it, or amend the required
+      order in `CLAUDE.md` to allow this. Do not leave it as drift.
+- [ ] **`climate-pipeline` writes its phase headings as `Phase 1 -- Ingest`**
+      where the other four use an em dash.
+- [ ] **`dask` and `icechunk` open with a hand-maintained contents list** that
+      the other three pages do not have. The site has a sidebar and the offline
+      book builds its own table of contents, so these are now maintained by
+      hand for no reader. Drop them, or add them to all five.
+
+## Groundwork laid, work not started
+
+Both extensions are planned for open-climate-service, and the projects here
+exist to make them routine rather than exploratory. See
+[`docs/open-climate-service.md`](docs/open-climate-service.md) for the full
+argument.
+
+### Icechunk on S3
+
+OCS calls `icechunk.local_filesystem_storage` only. A commit is a
+compare-and-swap on a branch pointer, so one committer at a time is correct on
+a local filesystem — and object storage becomes necessary the moment compute
+spans machines or a second writer appears.
+
+- [ ] Add an S3-backed storage example to the `icechunk` project, against
+      MinIO in a `compose.yml`, following the `dask-distributed` pattern: the
+      example still runs without the service and says what the fallback cannot
+      show.
+- [ ] Demonstrate the conditional write that a local filesystem cannot
+      provide, as the concrete argument for migrating.
+- [ ] Measure what an append costs on object storage versus locally, since
+      icechunk shares chunks by reference and a rewrite is a full copy.
+
+### Distributed dask against a real store
+
+The cluster exists; what is missing is the two halves meeting.
+
+- [ ] An example where the graph carries an `s3://` URL that resolves
+      identically on the client and on every worker — the problem
+      `0302_shared_storage.py` demonstrates and no amount of volume-mounting
+      solves cleanly.
+- [ ] icechunk's fork/merge distributed write: the coordinator forks a session
+      per worker, workers write chunks in parallel, the coordinator merges and
+      commits once. Many writers, one committer.
+
+## Conventions to hold
+
+- Every example must run without the service it teaches about, and say what
+  the fallback cannot show.
+- `make verify-all` before claiming anything is done, and `make offline` too
+  when the change touched `docs/`.
+- Never quote a number that did not come out of a run.
