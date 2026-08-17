@@ -12,7 +12,7 @@ default is what keeps those products finite.
 Run: make run EXAMPLE=0302_reductions
 """
 
-from playground_xarray import temperature_dataset
+from climate_stack_xarray import temperature_dataset
 
 
 def main() -> None:

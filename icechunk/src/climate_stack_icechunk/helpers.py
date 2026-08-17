@@ -73,28 +73,38 @@ def write_dataset(
 
 
 def read_dataset(
-    repo: Any, *, branch: str | None = "main", snapshot_id: str | None = None, tag: str | None = None
+    repo: Any, *, branch: str | None = None, snapshot_id: str | None = None, tag: str | None = None
 ) -> xr.Dataset:
     """Open a dataset from a branch tip, a tag, or a specific snapshot.
 
-    Exactly one of the three selectors should be given; a snapshot id or tag
-    takes precedence over the branch.
+    At most one selector may be given; with none, the read is of ``main``.
+    Silently preferring one selector over another would make a typo look like a
+    working read of the wrong point in history, which is the failure mode
+    version control exists to prevent -- so a conflict raises instead.
 
     Args:
-        repo: The repository to read from.
+        repo: The repository to read from. Defaults to the ``main`` tip.
         branch: Branch whose tip to read.
-        snapshot_id: A specific snapshot to read, ignoring the branch.
-        tag: A tag to read, ignoring the branch.
+        snapshot_id: A specific snapshot to read.
+        tag: A tag to read.
 
     Returns:
         The dataset as of that point in history.
+
+    Raises:
+        ValueError: If more than one of branch, snapshot_id, and tag is given.
     """
+    selectors = {"branch": branch, "snapshot_id": snapshot_id, "tag": tag}
+    given = sorted(name for name, value in selectors.items() if value is not None)
+    if len(given) > 1:
+        raise ValueError(f"give at most one of branch, snapshot_id, tag; got {', '.join(given)}")
+
     if snapshot_id is not None:
         session = repo.readonly_session(snapshot_id=snapshot_id)
     elif tag is not None:
         session = repo.readonly_session(tag=tag)
     else:
-        session = repo.readonly_session(branch)
+        session = repo.readonly_session(branch or "main")
     ds: xr.Dataset = xr.open_zarr(session.store, consolidated=False)
     return ds
 

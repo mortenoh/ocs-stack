@@ -1,3 +1,3 @@
 # xarray
 
-::: playground_xarray.synthetic
+::: climate_stack_xarray.synthetic

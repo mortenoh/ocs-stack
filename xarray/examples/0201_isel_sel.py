@@ -12,7 +12,7 @@ distinction decides whether the time dim survives into the next operation.
 Run: make run EXAMPLE=0201_isel_sel
 """
 
-from playground_xarray import temperature_dataset
+from climate_stack_xarray import temperature_dataset
 
 
 def main() -> None:

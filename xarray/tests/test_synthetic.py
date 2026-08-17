@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from playground_xarray import precipitation_dataset, temperature_dataset
+from climate_stack_xarray import precipitation_dataset, temperature_dataset
 
 
 class TestTemperatureDataset:

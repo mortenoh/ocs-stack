@@ -23,7 +23,7 @@ from pathlib import Path
 import pandas as pd
 import xarray as xr
 
-from playground_dask.helpers import random_field
+from climate_stack_dask.helpers import random_field
 
 
 def uniform_chunks(ds: xr.Dataset) -> xr.Dataset:

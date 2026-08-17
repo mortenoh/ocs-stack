@@ -1,4 +1,4 @@
-# playground-python
+# climate-stack
 
 Self-contained tutorial projects, one per library. Every project builds and
 runs on its own: its own `pyproject.toml`, `.venv`, `uv.lock`, Makefile, and
@@ -15,6 +15,8 @@ make list                     # every project
 make verify PROJECT=xarray    # lint, type-check, test, run every example
 make verify-all               # the whole repository
 make docs-serve               # this site, at http://127.0.0.1:8000
+make offline                  # one HTML file and a PDF, for reading away from a desk
+make share                    # serve this site to your own devices over Tailscale
 ```
 
 Inside a project: `make install`, `make lint`, `make test`, `make run-all`,

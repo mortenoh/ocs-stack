@@ -1,5 +1,5 @@
 [project]
-name = "playground-climate-pipeline"
+name = "climate-stack-climate-pipeline"
 version = "0.1.0"
 description = "A miniature climate service: ingest, store, derive, publish"
 readme = "README.md"
@@ -29,7 +29,7 @@ requires = ["uv_build>=0.9.0,<0.13.0"]
 build-backend = "uv_build"
 
 [tool.uv.build-backend]
-module-name = "playground_climate_pipeline"
+module-name = "climate_stack_climate_pipeline"
 
 [tool.ruff]
 target-version = "py313"
@@ -56,7 +56,7 @@ norecursedirs = ["examples", ".git", ".venv", "__pycache__"]
 [tool.coverage.run]
 branch = true
 relative_files = true
-source = ["playground_climate_pipeline"]
+source = ["climate_stack_climate_pipeline"]
 
 [tool.coverage.report]
 exclude_also = ["if TYPE_CHECKING:"]

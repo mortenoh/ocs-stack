@@ -15,7 +15,7 @@ Run: make run EXAMPLE=0402_concat_append
 
 import xarray as xr
 
-from playground_xarray import temperature_dataset
+from climate_stack_xarray import temperature_dataset
 
 
 def main() -> None:

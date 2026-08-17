@@ -110,7 +110,7 @@ that share dimensions and coordinates.
 ```python
 import xarray as xr
 
-from playground_xarray import precipitation_dataset, temperature_dataset
+from climate_stack_xarray import precipitation_dataset, temperature_dataset
 
 ds = xr.merge([temperature_dataset(days=31), precipitation_dataset(days=31)])
 print(list(ds.data_vars))       # ["t2m", "tp"]
@@ -388,14 +388,14 @@ xarray 2026.7.0   numpy 2.5.2   pandas 3.0.5   dask 2026.7.1   zarr 3.3.0
 
 ### The shared helpers
 
-Every example imports from `src/playground_xarray/synthetic.py`
-([source](../../xarray/src/playground_xarray/synthetic.py)) rather than
+Every example imports from `src/climate_stack_xarray/synthetic.py`
+([source](../../xarray/src/climate_stack_xarray/synthetic.py)) rather than
 building data inline. Two generators, both returning an `xr.Dataset` with dims
 `(time, y, x)`, daily time steps, CF-style attrs, and deterministic values for a
 given seed:
 
 ```python
-from playground_xarray import precipitation_dataset, temperature_dataset
+from climate_stack_xarray import precipitation_dataset, temperature_dataset
 
 ds = temperature_dataset(days=30, ny=20, nx=30, seed=0)     # variable "t2m", degC
 ds = precipitation_dataset(days=30, ny=20, nx=30, seed=0)   # variable "tp", mm/day
@@ -605,7 +605,7 @@ written to one store together.
 ```python
 import xarray as xr
 
-from playground_xarray import precipitation_dataset, temperature_dataset
+from climate_stack_xarray import precipitation_dataset, temperature_dataset
 
 ds = xr.merge([temperature_dataset(days=5, ny=4, nx=6),
                precipitation_dataset(days=5, ny=4, nx=6)])
@@ -699,7 +699,7 @@ broadcasting, `concat`, `stack`, `transpose`, `groupby` all address dims by
 name.
 
 ```python
-from playground_xarray import temperature_dataset
+from climate_stack_xarray import temperature_dataset
 
 t2m = temperature_dataset(days=31)["t2m"]
 print(t2m.dims, t2m.shape)
@@ -749,7 +749,7 @@ alignment, `reindex`, `groupby`, and `resample` possible. Non-dimension
 coordinates are how you carry extra labeling without claiming it is an axis.
 
 ```python
-from playground_xarray import temperature_dataset
+from climate_stack_xarray import temperature_dataset
 
 ds = temperature_dataset(days=5, ny=4, nx=6)
 
@@ -835,7 +835,7 @@ portable compared to most scientific formats.
 ```python
 import xarray as xr
 
-from playground_xarray import temperature_dataset
+from climate_stack_xarray import temperature_dataset
 
 celsius = temperature_dataset(days=10, ny=3, nx=4)["t2m"]
 kelvin = (celsius + 273.15).assign_attrs(units="K")
@@ -1000,7 +1000,7 @@ round-trip it is populated:
 import tempfile, os
 import xarray as xr
 
-from playground_xarray import temperature_dataset
+from climate_stack_xarray import temperature_dataset
 
 ds = temperature_dataset(days=5, ny=4, nx=6)
 print("before any write:", ds.t2m.encoding)
@@ -4109,7 +4109,7 @@ act of ingestion and it involves, in order:
 
 After that step, every downstream process can assume one shape, one unit
 system, one calendar. The synthetic helpers in
-`src/playground_xarray/synthetic.py` produce data that is already in that state,
+`src/climate_stack_xarray/synthetic.py` produce data that is already in that state,
 which is why every example in this project can start from `(time, y, x)` without
 ceremony.
 

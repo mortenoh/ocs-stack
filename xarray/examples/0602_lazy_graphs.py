@@ -16,7 +16,7 @@ import time
 
 import xarray as xr
 
-from playground_xarray import temperature_dataset
+from climate_stack_xarray import temperature_dataset
 
 
 def task_count(obj: xr.DataArray | xr.Dataset) -> int:

@@ -17,7 +17,7 @@ from typing import Any, cast
 from dask.base import get_scheduler
 from distributed import Client, LocalCluster
 
-from playground_dask import chunk_report, random_field, task_count
+from climate_stack_dask import chunk_report, random_field, task_count
 
 
 def start_cluster() -> LocalCluster:

@@ -50,7 +50,7 @@ up:
 
 wait:
 	@echo ">>> Waiting for the scheduler to accept connections"
-	@$(UV) run python -c "from playground_dask_distributed import wait_for_scheduler; wait_for_scheduler()"
+	@$(UV) run python -c "from climate_stack_dask_distributed import wait_for_scheduler; wait_for_scheduler()"
 
 down:
 	@echo ">>> Stopping the cluster and removing its volume"

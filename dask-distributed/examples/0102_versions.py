@@ -16,7 +16,7 @@ Run: make run EXAMPLE=0102_versions
 
 from typing import Any
 
-from playground_dask_distributed import connect
+from climate_stack_dask_distributed import connect
 
 # The packages whose versions actually matter on the wire: the framework
 # itself, the serializers it uses, and the array/dataframe libraries whose

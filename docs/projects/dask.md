@@ -494,7 +494,7 @@ operations.
 
 ### The shared helpers
 
-Every example imports from `src/playground_dask/helpers.py`, so all 22 lessons
+Every example imports from `src/climate_stack_dask/helpers.py`, so all 22 lessons
 start from the same shape of data. There are three functions.
 
 **`random_field(days=365, ny=256, nx=256, time_chunk=30, spatial_chunk=128,
@@ -688,7 +688,7 @@ array is created, and propagates through every operation until something changes
 it.
 
 ```python
-from playground_dask import chunk_report, random_field, task_count
+from climate_stack_dask import chunk_report, random_field, task_count
 
 arr = random_field()  # (365, 256, 256), chunks (30, 128, 128)
 print(chunk_report(arr))
@@ -3906,7 +3906,7 @@ exists at all in an otherwise array-shaped course.
   threads, not worker count, and a batch can never finish faster than its longest
   single task.
 - **[API reference](../reference/dask.md)** -- generated documentation for
-  `playground_dask.helpers`: `random_field`, `chunk_report`, `task_count`.
+  `climate_stack_dask.helpers`: `random_field`, `chunk_report`, `task_count`.
 
 ---
 

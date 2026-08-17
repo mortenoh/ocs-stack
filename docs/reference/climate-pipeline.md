@@ -1,11 +1,14 @@
-# climate
+# climate-pipeline
 
-::: playground_climate_pipeline.normalize
+The modules appear in pipeline order: normalize a raw source, fetch periods
+from it, ingest them one commit at a time, derive indices, and publish.
 
-::: playground_climate_pipeline.sources
+::: climate_stack_climate_pipeline.normalize
 
-::: playground_climate_pipeline.ingest
+::: climate_stack_climate_pipeline.sources
 
-::: playground_climate_pipeline.indices
+::: climate_stack_climate_pipeline.ingest
 
-::: playground_climate_pipeline.publish
+::: climate_stack_climate_pipeline.indices
+
+::: climate_stack_climate_pipeline.publish

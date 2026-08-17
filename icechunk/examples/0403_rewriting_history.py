@@ -20,7 +20,7 @@ from typing import Any
 import pandas as pd
 import xarray as xr
 
-from playground_icechunk import (
+from climate_stack_icechunk import (
     climate_dataset,
     describe_history,
     open_repo,

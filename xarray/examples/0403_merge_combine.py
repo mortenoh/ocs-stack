@@ -15,7 +15,7 @@ Run: make run EXAMPLE=0403_merge_combine
 
 import xarray as xr
 
-from playground_xarray import precipitation_dataset, temperature_dataset
+from climate_stack_xarray import precipitation_dataset, temperature_dataset
 
 
 def main() -> None:

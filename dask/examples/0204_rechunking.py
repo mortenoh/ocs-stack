@@ -19,7 +19,7 @@ from typing import Any
 
 from dask.base import optimize
 
-from playground_dask import chunk_report, random_field, task_count
+from climate_stack_dask import chunk_report, random_field, task_count
 
 
 def optimized_task_count(obj: Any) -> int:

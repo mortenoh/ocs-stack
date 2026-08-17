@@ -14,7 +14,7 @@ Run: make run EXAMPLE=0702_time_handling
 
 import pandas as pd
 
-from playground_xarray import temperature_dataset
+from climate_stack_xarray import temperature_dataset
 
 
 def main() -> None:

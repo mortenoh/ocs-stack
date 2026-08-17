@@ -1,3 +1,3 @@
 # dask
 
-::: playground_dask.helpers
+::: climate_stack_dask.helpers

@@ -890,7 +890,7 @@ wheels = [
 ]
 
 [[package]]
-name = "playground-climate-pipeline"
+name = "climate-stack-climate-pipeline"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [

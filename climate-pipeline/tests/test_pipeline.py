@@ -7,7 +7,7 @@ import pandas as pd
 import pytest
 import xarray as xr
 
-from playground_climate_pipeline import (
+from climate_stack_climate_pipeline import (
     Period,
     bounding_box,
     committed_periods,

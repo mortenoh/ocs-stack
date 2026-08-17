@@ -1,8 +1,10 @@
-# playground-python
+# climate-stack
 
-Self-contained tutorial projects, one per library. Every project builds and
-runs on its own — its own `pyproject.toml`, `.venv`, `uv.lock`, Makefile, and
-examples. There is no root package and no uv workspace.
+The layered stack a climate data service is built from — labeled arrays, then
+parallel execution, then a cluster, then versioned storage — one self-contained
+tutorial project per layer, with a working pipeline on top. Every project
+builds and runs on its own: its own `pyproject.toml`, `.venv`, `uv.lock`,
+Makefile, and examples. There is no root package and no uv workspace.
 
 The current set exists to learn the stack behind
 [open-climate-service](https://github.com/dhis2/open-climate-service) from the
@@ -26,6 +28,8 @@ make list                     # every project
 make verify PROJECT=xarray    # lint, type-check, test, run every example
 make verify-all               # the whole repository
 make docs-serve               # the documentation site
+make offline                  # one HTML file and a PDF, for reading away from a desk
+make share                    # serve the site to your own devices over Tailscale
 ```
 
 Inside a project: `make install`, `make lint`, `make test`, `make run-all`,
@@ -44,6 +48,21 @@ reference.
 - **[Open Climate Service](docs/open-climate-service.md)** — how this maps onto
   OCS, and the groundwork for the planned work
 - **[Conventions](docs/conventions.md)** — how projects are built and verified
+
+### Reading it away from a desk
+
+`make offline` renders every page above into `dist/climate-stack.html` — one
+file, no assets, no network, roughly 450 printed pages — and prints it to
+`dist/climate-stack.pdf` with headless Chrome. Copy the HTML to a phone and it
+reflows to the screen, keeps its table of contents, and follows the system
+light/dark setting. It works with no connection at all, which the site does
+not.
+
+`make share` is the other half: it builds the site and serves it bound to this
+machine's Tailscale address, so a phone on the same tailnet can read it with
+search intact. It binds to the tailnet address rather than `0.0.0.0`, so
+nothing on the local network can reach it, and it deliberately does not use
+`tailscale funnel`, which would publish the site to the public internet.
 
 New here? Read [the stack](docs/stack.md), then run
 `make run EXAMPLE=0401_full_pipeline` in [`climate-pipeline/`](climate-pipeline/) to see every

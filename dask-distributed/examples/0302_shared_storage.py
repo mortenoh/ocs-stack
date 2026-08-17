@@ -22,7 +22,7 @@ import numpy as np
 import pandas as pd
 import xarray as xr
 
-from playground_dask_distributed import connect
+from climate_stack_dask_distributed import connect
 
 # Mounted into the scheduler and every worker by compose.yml.
 SHARED_DIR = "/data"

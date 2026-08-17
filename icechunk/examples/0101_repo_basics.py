@@ -21,7 +21,7 @@ from typing import Any
 import icechunk
 import xarray as xr
 
-from playground_icechunk import climate_dataset, quiet_icechunk_logs
+from climate_stack_icechunk import climate_dataset, quiet_icechunk_logs
 
 
 def walk_repo(root: Path) -> list[tuple[str, int, int]]:

@@ -19,7 +19,7 @@ from typing import Any
 import dask.array as da
 from distributed import performance_report
 
-from playground_dask_distributed import connect
+from climate_stack_dask_distributed import connect
 
 # Written into the project rather than a temp dir on purpose: the point of a
 # report is that it outlives the run. `make clean` removes this directory.

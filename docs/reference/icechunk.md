@@ -1,3 +1,3 @@
 # icechunk
 
-::: playground_icechunk.helpers
+::: climate_stack_icechunk.helpers

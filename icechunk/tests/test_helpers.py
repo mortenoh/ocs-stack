@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from playground_icechunk import (
+from climate_stack_icechunk import (
     climate_dataset,
     describe_history,
     open_repo,
@@ -68,6 +68,28 @@ class TestRepository:
             old = float(read_dataset(repo, snapshot_id=first).t2m.mean())
             new = float(read_dataset(repo).t2m.mean())
             assert new - old == pytest.approx(5.0, abs=1e-9)
+
+    @pytest.mark.parametrize(
+        "selectors",
+        [
+            {"branch": "main", "snapshot_id": "ABC"},
+            {"branch": "main", "tag": "v1"},
+            {"snapshot_id": "ABC", "tag": "v1"},
+            {"branch": "main", "snapshot_id": "ABC", "tag": "v1"},
+        ],
+    )
+    def test_rejects_conflicting_selectors(self, selectors: dict[str, str]):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = open_repo(Path(tmp) / "store.icechunk")
+            write_dataset(repo, climate_dataset(days=2), "first")
+            with pytest.raises(ValueError, match="at most one of branch, snapshot_id, tag"):
+                read_dataset(repo, **selectors)
+
+    def test_explicit_branch_still_reads(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = open_repo(Path(tmp) / "store.icechunk")
+            write_dataset(repo, climate_dataset(days=2), "first")
+            assert read_dataset(repo, branch="main").sizes["time"] == 2
 
     def test_append_extends_time(self):
         with tempfile.TemporaryDirectory() as tmp:

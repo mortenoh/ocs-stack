@@ -17,7 +17,7 @@ from pathlib import Path
 
 import xarray as xr
 
-from playground_xarray import temperature_dataset
+from climate_stack_xarray import temperature_dataset
 
 
 def backing(ds: xr.Dataset, var: str) -> str:

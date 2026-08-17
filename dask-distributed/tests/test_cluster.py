@@ -2,8 +2,8 @@ import socket
 
 import pytest
 
-from playground_dask_distributed import ClusterSession, scheduler_reachable
-from playground_dask_distributed.cluster import _split_address
+from climate_stack_dask_distributed import ClusterSession, scheduler_reachable
+from climate_stack_dask_distributed.cluster import _split_address
 
 
 class TestSplitAddress:

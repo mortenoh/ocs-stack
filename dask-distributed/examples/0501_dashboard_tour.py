@@ -19,7 +19,7 @@ from typing import Any
 import dask.array as da
 from distributed import get_task_stream
 
-from playground_dask_distributed import connect
+from climate_stack_dask_distributed import connect
 
 
 def sample_workload() -> Any:

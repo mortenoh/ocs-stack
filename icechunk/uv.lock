@@ -890,7 +890,7 @@ wheels = [
 ]
 
 [[package]]
-name = "playground-icechunk"
+name = "climate-stack-icechunk"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [

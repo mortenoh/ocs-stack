@@ -9,7 +9,7 @@ appended to a versioned icechunk store one period at a time, derived into
 climate indices, and published with GeoZarr attributes and a STAC collection.
 Each phase is one stage of that pipeline.
 
-The library lives in `src/playground_climate_pipeline/`:
+The library lives in `src/climate_stack_climate_pipeline/`:
 
 | Module | Role |
 |---|---|

@@ -12,7 +12,7 @@ clients. groupby handles the calendar bookkeeping that indexing math gets wrong.
 Run: make run EXAMPLE=0303_groupby_climatology
 """
 
-from playground_xarray import temperature_dataset
+from climate_stack_xarray import temperature_dataset
 
 
 def main() -> None:

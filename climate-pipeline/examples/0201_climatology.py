@@ -19,7 +19,7 @@ from typing import Any
 import icechunk  # no type stubs; repository handles stay narrowly typed as Any
 import xarray as xr
 
-from playground_climate_pipeline import (
+from climate_stack_climate_pipeline import (
     climatological_normal,
     enumerate_periods,
     fetch_temperature,
@@ -27,7 +27,7 @@ from playground_climate_pipeline import (
     monthly_anomaly,
     store_path,
 )
-from playground_climate_pipeline.sources import Period
+from climate_stack_climate_pipeline.sources import Period
 
 # Silence the Rust-side WARN chatter icechunk emits during ordinary appends.
 icechunk.set_logs_filter("error")

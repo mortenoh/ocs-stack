@@ -19,7 +19,7 @@ from typing import Any
 
 import icechunk
 
-from playground_icechunk import (
+from climate_stack_icechunk import (
     climate_dataset,
     open_repo,
     quiet_icechunk_logs,

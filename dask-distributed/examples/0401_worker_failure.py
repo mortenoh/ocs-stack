@@ -19,7 +19,7 @@ from typing import Any
 
 import dask.array as da
 
-from playground_dask_distributed import connect
+from climate_stack_dask_distributed import connect
 
 # The nanny needs a moment to notice the death and start a replacement.
 RECOVERY_TIMEOUT = 45.0

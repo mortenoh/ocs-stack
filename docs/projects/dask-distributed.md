@@ -675,7 +675,7 @@ others.
 
 ### The fallback design in cluster.py
 
-[`src/playground_dask_distributed/cluster.py`](../../dask-distributed/src/playground_dask_distributed/cluster.py)
+[`src/climate_stack_dask_distributed/cluster.py`](../../dask-distributed/src/climate_stack_dask_distributed/cluster.py)
 is 200 lines whose entire job is to answer one question — "is there a cluster?"
 — and to make the answer not matter for whether an example runs.
 
@@ -844,7 +844,7 @@ returns a `Future` immediately. The call has not run yet — it may not even hav
 been assigned to a worker.
 
 ```python
-from playground_dask_distributed import connect
+from climate_stack_dask_distributed import connect
 
 def where_am_i(task_id: int) -> str:
     import socket
@@ -2486,10 +2486,10 @@ def flaky(key: str, fail_times: int) -> str:
         # Not running on a worker (the synchronous fallback path).
         store = _ATTEMPTS
     else:
-        existing: dict[str, int] | None = getattr(worker, "_playground_attempts", None)
+        existing: dict[str, int] | None = getattr(worker, "_climate_stack_attempts", None)
         if existing is None:
             existing = {}
-            setattr(worker, "_playground_attempts", existing)
+            setattr(worker, "_climate_stack_attempts", existing)
         store = existing
 
     seen = store.get(key, 0) + 1
@@ -2573,7 +2573,7 @@ worker-1  | Key:       always_fails-81300c72-a02a-408b-a1ce-a905a02e85a4
 worker-1  | State:     executing
 worker-1  | Task:  <Task 'always_fails-81300c72-a02a-408b-a1ce-a905a02e85a4' always_fails(...)>
 worker-1  | Exception: "ValueError('this task was never going to work (value=7)')"
-worker-1  | Traceback: '  File "/Users/morteoh/dev/mortenoh/playground-python/dask-distributed/examples/0402_errors_and_retries.py", line 38, in always_fails\n'
+worker-1  | Traceback: '  File "/Users/morteoh/dev/mortenoh/climate-stack/dask-distributed/examples/0402_errors_and_retries.py", line 38, in always_fails\n'
 ```
 
 Note the file path in that traceback: `/Users/morteoh/...`. That path does not
@@ -2951,7 +2951,7 @@ for name, description in SECTIONS:
 
 ```text
 Running a workload inside performance_report(), writing to:
-  /Users/morteoh/dev/mortenoh/playground-python/dask-distributed/reports/performance-report.html
+  /Users/morteoh/dev/mortenoh/climate-stack/dask-distributed/reports/performance-report.html
 
   computed 4,237.57 in 0.53s
   wrote 141 KB of self-contained HTML
@@ -3644,7 +3644,7 @@ of this same mechanism appears in the worker logs, where the traceback reports a
 client-side path that does not exist in the container:
 
 ```text
-worker-1  | Traceback: '  File "/Users/morteoh/dev/mortenoh/playground-python/dask-distributed/examples/0402_errors_and_retries.py", line 38, in always_fails\n'
+worker-1  | Traceback: '  File "/Users/morteoh/dev/mortenoh/climate-stack/dask-distributed/examples/0402_errors_and_retries.py", line 38, in always_fails\n'
 ```
 
 **2. Genuinely worker-local state lives on the `Worker` object.**
@@ -3653,10 +3653,10 @@ worker-1  | Traceback: '  File "/Users/morteoh/dev/mortenoh/playground-python/da
 from distributed import get_worker
 
 worker = get_worker()
-existing = getattr(worker, "_playground_attempts", None)
+existing = getattr(worker, "_climate_stack_attempts", None)
 if existing is None:
     existing = {}
-    setattr(worker, "_playground_attempts", existing)
+    setattr(worker, "_climate_stack_attempts", existing)
 ```
 
 That object persists for the life of the worker process, which makes it right
@@ -3910,7 +3910,7 @@ committing to the same branch.
 - **[Scaling](../scaling.md)** — the ceilings, layer by layer, and which one you
   are actually hitting. The distributed row is measured with `0403` and `0503`.
 - **[API reference](../reference/dask-distributed.md)** — generated documentation
-  for `playground_dask_distributed.cluster`: `connect`, `ClusterSession`,
+  for `climate_stack_dask_distributed.cluster`: `connect`, `ClusterSession`,
   `scheduler_reachable`, `wait_for_scheduler`, and `describe_workers`.
 
 Sideways, in the same repository: [dask](dask.md) for the graphs and chunking

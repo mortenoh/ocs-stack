@@ -531,7 +531,7 @@ The timing there is machine-dependent, like every timing in this page.
 
 ### The helpers
 
-`src/playground_icechunk/helpers.py` holds six functions, re-exported from the
+`src/climate_stack_icechunk/helpers.py` holds six functions, re-exported from the
 package root. They exist so the examples can say what they mean without
 repeating six lines of session boilerplate each time, and two of them are
 deliberate re-implementations of open-climate-service code kept close to the
@@ -676,27 +676,47 @@ write, `align_chunks=True` on appends, `region={"time": slice(...)}` for
 corrections. Where an example manages its own session rather than calling
 `write_dataset`, that is why.
 
-#### `read_dataset(repo, *, branch="main", snapshot_id=None, tag=None)`
+#### `read_dataset(repo, *, branch=None, snapshot_id=None, tag=None)`
 
 ```python
 def read_dataset(
-    repo: Any, *, branch: str | None = "main", snapshot_id: str | None = None, tag: str | None = None
+    repo: Any, *, branch: str | None = None, snapshot_id: str | None = None, tag: str | None = None
 ) -> xr.Dataset:
     """Open a dataset from a branch tip, a tag, or a specific snapshot."""
+    selectors = {"branch": branch, "snapshot_id": snapshot_id, "tag": tag}
+    given = sorted(name for name, value in selectors.items() if value is not None)
+    if len(given) > 1:
+        raise ValueError(f"give at most one of branch, snapshot_id, tag; got {', '.join(given)}")
+
     if snapshot_id is not None:
         session = repo.readonly_session(snapshot_id=snapshot_id)
     elif tag is not None:
         session = repo.readonly_session(tag=tag)
     else:
-        session = repo.readonly_session(branch)
+        session = repo.readonly_session(branch or "main")
     ds: xr.Dataset = xr.open_zarr(session.store, consolidated=False)
     return ds
 ```
 
-The three ways to name a point in history, in one signature. A snapshot id or a
-tag takes precedence over the branch. Underneath, all three produce a readonly
-session, which pins one snapshot for the life of the session — that pinning is
-the subject of [`0302_isolation.py`](../../icechunk/examples/0302_isolation.py).
+The three ways to name a point in history, in one signature. Underneath, all
+three produce a readonly session, which pins one snapshot for the life of the
+session — that pinning is the subject of
+[`0302_isolation.py`](../../icechunk/examples/0302_isolation.py).
+
+The guard is worth dwelling on, because the obvious alternative is worse. An
+earlier version of this helper defaulted `branch` to `"main"` and let a
+snapshot id quietly win over it, which reads fine until somebody writes
+`read_dataset(repo, branch="reprocess", snapshot_id=old)` and gets a silent,
+successful read of the wrong point in history. A wrong answer that looks right
+is precisely what a version-controlled store is supposed to make impossible, so
+the conflict raises:
+
+```pycon
+>>> read_dataset(repo, branch="main", tag="era5-2024q1-final")
+ValueError: give at most one of branch, snapshot_id, tag; got branch, tag
+```
+
+Passing nothing still reads the `main` tip, which is what every example does.
 
 icechunk also supports `readonly_session(branch, as_of=datetime)`, which resolves
 to the last snapshot on that branch at or before a wall-clock time. The helper
@@ -4472,7 +4492,7 @@ measured rather than assumed:
   shared-path constraint forces the move before the concurrency one does, and a
   decision table you can read your own deployment off.
 - **[reference/icechunk.md](../reference/icechunk.md)** — the generated API
-  reference for `playground_icechunk.helpers`, with signatures and full
+  reference for `climate_stack_icechunk.helpers`, with signatures and full
   docstrings for `open_repo`, `write_dataset`, `read_dataset`,
   `describe_history`, `climate_dataset`, and `quiet_icechunk_logs`.
 - **[Open Climate Service](../open-climate-service.md)** — the mapping across all

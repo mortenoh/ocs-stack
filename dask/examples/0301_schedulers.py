@@ -20,7 +20,7 @@ from typing import Any
 from dask.base import compute
 from dask.delayed import delayed
 
-from playground_dask import chunk_report, random_field, task_count
+from climate_stack_dask import chunk_report, random_field, task_count
 
 SCHEDULERS = ("synchronous", "threads", "processes")
 # One task per core keeps every worker busy for a full task, so the process

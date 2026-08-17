@@ -1,3 +1,3 @@
 # dask-distributed
 
-::: playground_dask_distributed.cluster
+::: climate_stack_dask_distributed.cluster

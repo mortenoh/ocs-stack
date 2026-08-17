@@ -1,6 +1,6 @@
 """Learning dask.distributed: helpers for connecting to the Compose cluster."""
 
-from playground_dask_distributed.cluster import (
+from climate_stack_dask_distributed.cluster import (
     SCHEDULER_ADDRESS,
     ClusterSession,
     connect,

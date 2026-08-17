@@ -18,7 +18,7 @@ from typing import Any
 import dask.array as da
 import dask.config
 
-from playground_dask_distributed import connect, describe_workers
+from climate_stack_dask_distributed import connect, describe_workers
 
 # The thresholds live in dask config as fractions of each worker's limit.
 THRESHOLDS = (

@@ -12,7 +12,7 @@ constraint that shapes how such a service is deployed.
 
 The cluster is defined in `compose.yml` (scheduler + 3 workers + shared
 volume) and built from `Dockerfile`. Helpers live in
-`src/playground_dask_distributed/`: `connect()` returns a session against the
+`src/climate_stack_dask_distributed/`: `connect()` returns a session against the
 Compose cluster, or an in-process fallback with a printed note.
 
 ## Phase 1 — Connecting to a real cluster

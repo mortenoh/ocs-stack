@@ -3,9 +3,10 @@
 Guidance for Claude Code when working anywhere in this repository. This is the
 only `CLAUDE.md` in the repo.
 
-This is a Python playground: self-contained tutorial projects, one per library,
-sitting directly at the repository root as `<project>/`. There is no root
-`pyproject.toml` and no uv workspace — every project has its own
+This is `climate-stack`: self-contained tutorial projects, one per layer of the
+climate data stack — xarray, dask, dask.distributed, icechunk, and a pipeline
+capstone — sitting directly at the repository root as `<project>/`. There is
+no root `pyproject.toml` and no uv workspace — every project has its own
 `pyproject.toml`, `.venv`, and `uv.lock`. Run `uv` and per-project `make` from
 inside a project directory. `make list` prints every project.
 
@@ -20,7 +21,7 @@ added a category decision per project and expressed nothing that `docs/` does
 not say better in prose. Do not reintroduce them without a real reason.
 
 Package names are prefixed but otherwise flat: the `xarray` project is
-distribution `playground-xarray`, module `playground_xarray`. The prefix is
+distribution `climate-stack-xarray`, module `climate_stack_xarray`. The prefix is
 required — a project studying `polars` cannot have a module named `polars`
 while depending on it.
 
@@ -36,6 +37,12 @@ one mkdocs site from the root `mkdocs.yml`. Projects do NOT have their own
 - Projects keep their own `README.md` and `ROADMAP.md` — working files that
   render fine on their own. Keep the roadmap accurate as examples land.
 - Write markdown that reads well as a plain file, not only when rendered.
+
+`make offline` at the root renders the same pages into one self-contained
+`dist/climate-stack.html` plus a PDF, and `make share` serves the site over
+Tailscale. `scripts/build-book.py` reads its page list from the `nav` in
+`mkdocs.yml`, so adding a page to the nav is enough — do not give the book its
+own list.
 
 ### What a project page must be
 
@@ -72,7 +79,7 @@ page in `docs/projects/` and `docs/reference/`.
 ## Per-project template (from chapkit)
 
 - Python 3.13 (`.python-version`), `uv` for everything, `uv_build` backend,
-  src layout: `src/playground_<name>/`.
+  src layout: `src/climate_stack_<name>/`.
 - ruff: `target-version = "py313"`, `line-length = 120`, select
   `E, W, F, I, D`, google docstring convention, per-file ignores as in the
   starter project.
@@ -138,7 +145,10 @@ class of confusing failures.
 
 `make verify PROJECT=<name>` at the root runs the project's `ci` target (lint,
 type checks, tests) plus every example; `make verify-all` sweeps the whole
-repository; `make docs-build` builds the site.
+repository; `make docs-build` builds the site and checks every relative link.
+When a change touches `docs/`, `make offline` too — the book builder resolves
+links differently from mkdocs and is the thing that catches a nav entry
+pointing at a page that does not exist.
 
 ## Conventions
 

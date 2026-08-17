@@ -12,7 +12,7 @@ concrete: masking to NaN preserves the grid, dropping destroys it.
 Run: make run EXAMPLE=0203_masking
 """
 
-from playground_xarray import precipitation_dataset
+from climate_stack_xarray import precipitation_dataset
 
 
 def main() -> None:

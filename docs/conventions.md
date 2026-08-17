@@ -8,7 +8,7 @@ projects, groups added a category decision per project and bought nothing that
 this documentation does not express better in prose.
 
 Package names are prefixed but otherwise flat: the `xarray` project is
-distribution `playground-xarray`, module `playground_xarray`. The prefix is
+distribution `climate-stack-xarray`, module `climate_stack_xarray`. The prefix is
 load-bearing — a project studying `polars` cannot have a module named `polars`
 while depending on it.
 
@@ -84,6 +84,28 @@ statically through griffe. That means the docs build needs none of the
 projects' dependencies installed: `mkdocs.yml` simply points `paths` at each
 project's `src/` directory, and `make docs-build` runs the whole thing through
 `uvx` without a root virtualenv.
+
+### Reading it offline
+
+The site is the right shape at a desk and the wrong shape on a phone with no
+signal. `make offline` produces the other shape:
+
+- `dist/climate-stack.html` — every page in nav order in one self-contained
+  file. No assets, no network, no sidebar; cross-page links become anchors
+  within the document, and links to source outside `docs/` become the path in
+  monospace, since a standalone file cannot follow them.
+- `dist/climate-stack.pdf` — the same file printed by headless Chrome, about
+  450 A4 pages.
+
+`scripts/build-book.py` reads the nav out of `mkdocs.yml` rather than keeping
+its own list, so a page added to the site is in the book without a second edit.
+It uses the same markdown extensions, minus the mermaid fence, which has no
+renderer in a standalone file.
+
+`make share` serves the built site over Tailscale for reading on another
+device with search intact. It binds to this machine's tailnet address rather
+than `0.0.0.0`, so the local network cannot reach it, and it does not use
+`tailscale funnel`, which would publish it to the internet.
 
 ## Working rules
 

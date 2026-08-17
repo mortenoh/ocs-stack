@@ -19,7 +19,7 @@ import numpy as np
 import xarray as xr
 from xarray.backends import list_engines
 
-from playground_xarray import precipitation_dataset, temperature_dataset
+from climate_stack_xarray import precipitation_dataset, temperature_dataset
 
 
 def human_size(num_bytes: int) -> str:

@@ -15,7 +15,7 @@ Run: make run EXAMPLE=0101_connect
 
 import os
 
-from playground_dask_distributed import connect, describe_workers
+from climate_stack_dask_distributed import connect, describe_workers
 
 
 def where_am_i(task_id: int) -> str:

@@ -18,7 +18,7 @@ from typing import Any
 
 from distributed import get_task_stream
 
-from playground_dask_distributed import connect
+from climate_stack_dask_distributed import connect
 
 N_FAST = 40
 N_SLOW = 3

@@ -21,7 +21,7 @@ import time
 
 import numpy as np
 
-from playground_dask_distributed import connect
+from climate_stack_dask_distributed import connect
 
 # 8 MB per array: big enough that the transfer dominates, small enough that
 # three workers with 1.5 GiB each never come close to their limit.

@@ -22,7 +22,7 @@ import icechunk
 import xarray as xr
 import zarr
 
-from playground_icechunk import (
+from climate_stack_icechunk import (
     climate_dataset,
     open_repo,
     quiet_icechunk_logs,

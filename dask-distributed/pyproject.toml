@@ -1,5 +1,5 @@
 [project]
-name = "playground-dask-distributed"
+name = "climate-stack-dask-distributed"
 version = "0.1.0"
 description = "Learning dask.distributed against a real multi-container cluster run with Docker Compose"
 readme = "README.md"
@@ -28,7 +28,7 @@ requires = ["uv_build>=0.9.0,<0.13.0"]
 build-backend = "uv_build"
 
 [tool.uv.build-backend]
-module-name = "playground_dask_distributed"
+module-name = "climate_stack_dask_distributed"
 
 [tool.ruff]
 target-version = "py313"
@@ -55,7 +55,7 @@ norecursedirs = ["examples", ".git", ".venv", "__pycache__"]
 [tool.coverage.run]
 branch = true
 relative_files = true
-source = ["playground_dask_distributed"]
+source = ["climate_stack_dask_distributed"]
 
 [tool.coverage.report]
 exclude_also = ["if TYPE_CHECKING:"]

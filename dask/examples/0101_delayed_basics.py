@@ -20,7 +20,7 @@ from typing import Any
 from dask.base import compute
 from dask.delayed import Delayed, delayed
 
-from playground_dask import task_count
+from climate_stack_dask import task_count
 
 WORK_SECONDS = 0.3
 """Deterministic stand-in cost for a 'real' computation, so timings are reliable."""

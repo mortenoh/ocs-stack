@@ -26,7 +26,7 @@ import numpy as np
 import pandas as pd
 import xarray as xr
 
-from playground_dask_distributed import connect
+from climate_stack_dask_distributed import connect
 
 SHARED_DIR = "/data"
 DAYS = 365
