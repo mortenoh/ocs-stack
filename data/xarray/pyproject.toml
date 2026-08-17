@@ -1,10 +1,16 @@
 [project]
-name = "playground-lang-start"
+name = "playground-data-xarray"
 version = "0.1.0"
-description = "Starter project verifying the playground-python template"
+description = "Learning xarray, from the data model to dask-backed lazy computation"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "dask[array,diagnostics]>=2026.7.1",
+    "netcdf4>=1.7.4",
+    "scipy>=1.18.0",
+    "xarray>=2026.7.0",
+    "zarr>=3.3.0",
+]
 
 [dependency-groups]
 dev = [
@@ -13,6 +19,7 @@ dev = [
     "mkdocs-material>=9.7.7",
     "mkdocstrings[python]>=1.0.6",
     "mypy>=2.3.1",
+    "pandas-stubs>=3.0.5.260730",
     "pyright>=1.1.411",
     "pytest>=9.1.1",
     "pytest-cov>=7.1.0",
@@ -24,7 +31,7 @@ requires = ["uv_build>=0.9.0,<0.13.0"]
 build-backend = "uv_build"
 
 [tool.uv.build-backend]
-module-name = "playground_lang_start"
+module-name = "playground_data_xarray"
 
 [tool.ruff]
 target-version = "py313"
@@ -44,13 +51,6 @@ convention = "google"
 "src/**/*.py" = ["D102", "D105", "D107"]
 "examples/**/*.py" = []
 
-[tool.ruff.format]
-quote-style = "double"
-indent-style = "space"
-skip-magic-trailing-comma = false
-docstring-code-format = true
-docstring-code-line-length = "dynamic"
-
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 norecursedirs = ["examples", ".git", ".venv", "__pycache__"]
@@ -58,7 +58,7 @@ norecursedirs = ["examples", ".git", ".venv", "__pycache__"]
 [tool.coverage.run]
 branch = true
 relative_files = true
-source = ["playground_lang_start"]
+source = ["playground_data_xarray"]
 
 [tool.coverage.report]
 exclude_also = ["if TYPE_CHECKING:"]
