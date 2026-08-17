@@ -1,0 +1,42 @@
+# Byte-compiled / caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.pyright/
+
+# Environments
+.venv/
+.env
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Coverage
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# mkdocs build output (per project)
+site/
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Claude Code local tooling state (per-machine settings, task locks)
+.claude/
+
+# Playwright MCP session output (snapshots, console logs)
+.playwright-mcp/
