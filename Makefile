@@ -1,14 +1,22 @@
 # Root Makefile for the tutorial collection.
-# Projects live in <group>/<name>/ with their own Makefiles; this one drives
-# verification across the whole collection via scripts/verify.sh.
+# Each project sits at the repository root with its own Makefile; this one
+# drives verification across the collection and builds the documentation site.
 
 .DEFAULT_GOAL := help
 SHELL := /bin/bash
 
-# Override on the command line, e.g. `make verify PROJECT=lang/start`.
+# Override on the command line, e.g. `make verify PROJECT=xarray`.
 PROJECT ?=
 
-.PHONY: help list verify verify-all
+# The docs site needs none of the projects' dependencies: mkdocstrings reads
+# their source statically, so uvx supplies the toolchain and there is no root
+# virtualenv to keep in sync. NO_MKDOCS_2_WARNING silences a promo banner.
+MKDOCS := NO_MKDOCS_2_WARNING=1 uvx --quiet \
+	--with mkdocs-material \
+	--with 'mkdocstrings[python]' \
+	mkdocs
+
+.PHONY: help list verify verify-all docs docs-serve docs-build clean
 
 help: ## Show this help
 	@echo "Targets:"
@@ -16,15 +24,29 @@ help: ## Show this help
 		awk -F':.*## ' '{printf "  %-16s %s\n", $$1, $$2}'
 	@echo
 	@echo "Examples:"
-	@echo "  make verify PROJECT=lang/start   # lint + tests + docs + run examples"
-	@echo "  make verify-all                  # the full local sweep"
+	@echo "  make verify PROJECT=xarray   # lint + tests + run every example"
+	@echo "  make verify-all              # the full local sweep"
+	@echo "  make docs-serve              # the documentation site"
 
-list: ## List all discoverable projects (group/name)
+list: ## List all discoverable projects
 	@./scripts/verify.sh --list
 
-verify: ## Verify one project (set PROJECT=group/name): lint, tests, docs, examples
-	@test -n "$(PROJECT)" || { echo "set PROJECT=group/name or a bare name (see: make list)"; exit 2; }
+verify: ## Verify one project (set PROJECT=<name>): lint, tests, examples
+	@test -n "$(PROJECT)" || { echo "set PROJECT=<name> (see: make list)"; exit 2; }
 	@./scripts/verify.sh $(PROJECT)
 
 verify-all: ## Full local sweep over every project
 	@./scripts/verify.sh --all
+
+docs-serve: ## Serve the documentation site with live reload
+	@echo ">>> Serving documentation at http://127.0.0.1:8000"
+	@$(MKDOCS) serve
+
+docs-build: ## Build the documentation site into site/
+	@echo ">>> Building documentation site"
+	@$(MKDOCS) build
+
+docs: docs-serve
+
+clean: ## Remove the built documentation site
+	@rm -rf site

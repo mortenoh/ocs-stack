@@ -2,39 +2,37 @@
 #
 # verify.sh — durable verification for the tutorial collection.
 #
-# For each project it runs, in order: uv sync, make ci (lint + tests + docs
-# build), and every example. It prints a per-project line and a final summary,
-# and exits non-zero if anything failed — so it works both locally and in CI.
+# For each project it runs, in order: uv sync, make ci (lint + tests), and
+# every example. It prints a per-project line and a final summary, and exits
+# non-zero if anything failed — so it works both locally and in CI.
+#
+# Documentation is centralised at the repository root; `make docs-build` there
+# builds the whole site in one pass.
 #
 # Usage:
-#   scripts/verify.sh lang/start data/polars   # named projects (or bare: start)
-#   scripts/verify.sh --all                    # every project
-#   scripts/verify.sh --list                   # list discoverable projects
+#   scripts/verify.sh xarray dask          # named projects
+#   scripts/verify.sh --all                # every project
+#   scripts/verify.sh --list               # list discoverable projects
 #
 set -uo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-# Projects live one level inside a topic group: <group>/<project>/pyproject.toml.
+# Projects sit directly at the repository root, one directory each. Anything
+# without a pyproject.toml (scripts/, docs/, .git/) is skipped by the check.
 discover() {
   local d
-  for d in "$ROOT"/*/*/; do
+  for d in "$ROOT"/*/; do
     [ -f "$d/pyproject.toml" ] || continue
     d="${d%/}"
     echo "${d#"$ROOT"/}"
   done
 }
 
-# Accept either the qualified path (lang/start) or the bare name (start).
 resolve() {
-  local name="$1" hit
+  local name="$1"
   if [ -f "$ROOT/$name/pyproject.toml" ]; then
     echo "$name"
-    return 0
-  fi
-  hit="$(discover | awk -F/ -v n="$name" '$2 == n')"
-  if [ -n "$hit" ] && [ "$(echo "$hit" | grep -c .)" -eq 1 ]; then
-    echo "$hit"
     return 0
   fi
   return 1
@@ -55,7 +53,7 @@ case "${1:-}" in
     projects="$(discover)"
     ;;
   "")
-    echo "usage: verify.sh [--list | --all | <group/name>...]" >&2
+    echo "usage: verify.sh [--list | --all | <project>...]" >&2
     exit 2
     ;;
   *)
