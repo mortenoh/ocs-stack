@@ -145,10 +145,13 @@ class of confusing failures.
 
 `make verify PROJECT=<name>` at the root runs the project's `ci` target (lint,
 type checks, tests) plus every example; `make verify-all` sweeps the whole
-repository; `make docs-build` builds the site, checks every relative link, and
-runs `make docs-check`, which enforces the per-example rules above mechanically
-— template conformance, an 80-line floor per example section, a link to the
-source, and roadmap agreement in both directions.
+repository; `make docs-build` builds the site under `--strict` (a mkdocs
+warning, such as a link to a heading that does not exist, fails it), checks
+every relative link, and runs `make docs-check`, which enforces the
+per-example rules above mechanically — template conformance, an 80-line floor
+per example section, a link to the source, roadmap agreement in both
+directions, and that the project is wired into `nav`, `paths`, and
+`docs/reference/`.
 When a change touches `docs/`, `make offline` too — the book builder resolves
 links differently from mkdocs and is the thing that catches a nav entry
 pointing at a page that does not exist.

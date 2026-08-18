@@ -73,9 +73,18 @@ documentation lapse is invisible in a way a broken build is not — a page is
 never "broken", only quietly thinner than it promises to be. It checks that
 every example carries a What/Why/Run docstring, `# SECTION` banners and a
 summary; that every example has its own section in the project page of at
-least 80 lines; that the page links the source; and that the roadmap and the
-examples directory agree in both directions. It runs as part of
-`make docs-build`.
+least 80 lines; that the page links the source; that the roadmap and the
+examples directory agree in both directions; and that the project is wired
+into the site at all — a reference stub, both nav entries, and a `paths` entry
+for mkdocstrings, since a project can satisfy every other rule and still not
+appear. It runs as part of `make docs-build`.
+
+`make docs-build` passes `--strict` to mkdocs, so a warning fails the build.
+That matters for one case `check-links.sh` cannot cover: it strips the anchor
+before testing a path, so a link to a heading that does not exist resolves as
+far as it is concerned. mkdocs validates those anchors, and without `--strict`
+it would say so and exit 0 anyway. `make docs-serve` stays lenient, so a
+half-written page still reloads.
 
 `make verify` runs every example and reads its output, because compiling proves
 it builds, not that it works. Every number quoted in these pages came out of an

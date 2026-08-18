@@ -56,9 +56,14 @@ docs-serve: ## Serve the documentation site with live reload
 	@echo ">>> Serving documentation at http://127.0.0.1:8000"
 	@$(MKDOCS) serve
 
+# --strict turns mkdocs warnings into failures. Without it a link to an
+# anchor that does not exist is announced and then ignored, and the build
+# still exits 0 -- check-links.sh cannot catch those, since it strips the
+# anchor before testing the path. docs-serve stays lenient so a half-written
+# page still reloads.
 docs-build: ## Build the documentation site into site/
 	@echo ">>> Building documentation site"
-	@$(MKDOCS) build
+	@$(MKDOCS) build --strict
 	@$(MAKE) --no-print-directory docs-links
 	@$(MAKE) --no-print-directory docs-check
 

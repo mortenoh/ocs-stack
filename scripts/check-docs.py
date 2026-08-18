@@ -16,6 +16,9 @@ Checks, per project:
 3. Every example is linked from the project page, so the reader can get to the
    source.
 4. The ROADMAP and the examples directory agree in both directions.
+5. The project is wired into the site: a reference stub, both nav entries, and
+   a ``paths`` entry for mkdocstrings. A project can satisfy every rule above
+   and still be invisible on the site, which is the failure this catches.
 
 Usage: scripts/check-docs.py [--min-lines N]
 
@@ -39,7 +42,10 @@ Heading = tuple[int, int, str]
 
 
 def projects() -> list[str]:
-    """Return every project directory, in the order the nav lists them.
+    """Return every project directory, sorted by name.
+
+    Directory order, not nav order -- the nav is pedagogical (xarray before
+    dask before icechunk) and nothing here depends on the sequence.
 
     Returns:
         Project directory names.
@@ -104,6 +110,38 @@ def check_example_template(path: pathlib.Path) -> list[str]:
     return problems
 
 
+def check_site_wiring(project: str) -> list[str]:
+    """Check that a project actually reaches the built site.
+
+    CLAUDE.md lists four edits for adding a project: ``paths``, ``nav``, a page
+    in ``docs/projects/`` and a stub in ``docs/reference/``. The other checks
+    here cover the page; miss any of the rest and the project is complete,
+    conformant, and absent from the site.
+
+    mkdocs.yml is matched as text rather than parsed, so this needs no yaml
+    dependency and the script keeps running under a bare interpreter.
+
+    Args:
+        project: Project directory name.
+
+    Returns:
+        One message per violation; empty when the project is wired in.
+    """
+    problems: list[str] = []
+    if not (ROOT / "docs" / "reference" / f"{project}.md").is_file():
+        problems.append(f"{project}: no mkdocstrings stub at docs/reference/{project}.md")
+
+    config = (ROOT / "mkdocs.yml").read_text(encoding="utf-8")
+    for needle, what in (
+        (f"projects/{project}.md", "the project page is not in the mkdocs nav"),
+        (f"reference/{project}.md", "the reference stub is not in the mkdocs nav"),
+        (f"{project}/src", "mkdocstrings has no paths entry for the source"),
+    ):
+        if needle not in config:
+            problems.append(f"{project}: {what} ({needle} is missing from mkdocs.yml)")
+    return problems
+
+
 def check_project(project: str, min_lines: int) -> list[str]:
     """Check one project's examples, page, and roadmap against each other.
 
@@ -114,7 +152,7 @@ def check_project(project: str, min_lines: int) -> list[str]:
     Returns:
         One message per violation; empty when the project conforms.
     """
-    problems: list[str] = []
+    problems = check_site_wiring(project)
     examples = sorted((ROOT / project / "examples").glob("*.py"))
     if not examples:
         return [f"{project}: no examples found"]

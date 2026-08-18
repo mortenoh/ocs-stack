@@ -31,8 +31,10 @@ inconsistencies the review found are fixed.
 ## Known limit of the documentation check
 
 `make docs-check` enforces structure: template conformance, section depth,
-source links, roadmap agreement. It cannot tell whether a quoted output block
-is still true.
+source links, roadmap agreement, and that a project reaches the site at all.
+`make docs-build` runs mkdocs under `--strict`, so a link to a heading that
+does not exist fails the build rather than warning into a passing one. None of
+that can tell whether a quoted output block is still true.
 
 Output quoted from examples is covered indirectly — `make verify-all` runs all
 86 and their output is read. Output belonging to the pages themselves, in the

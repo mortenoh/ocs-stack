@@ -51,6 +51,12 @@ fi
 
 mkdir -p "$(dirname "$OUTPUT")"
 
+# Delete any previous PDF first. The wait below treats "the file exists and
+# has stopped growing" as success, and a stale file from an earlier run
+# satisfies that before Chrome has written a byte -- so without this, a failed
+# render reports success and hands back yesterday's book.
+rm -f "$OUTPUT"
+
 # A throwaway profile keeps this out of the real one; --headless=new is the
 # only mode that honours the print stylesheet and @page rules.
 PROFILE="$(mktemp -d)"
