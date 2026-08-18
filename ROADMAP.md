@@ -6,14 +6,14 @@ what is open across the collection rather than inside one project.
 
 ## Open from the review of 2026-08-17
 
-Two items need a decision that is not mine to make. The three documentation
-inconsistencies the review found are fixed.
+One item needs a decision that is not mine to make. The three documentation
+inconsistencies the review found are fixed, and the directory has been renamed.
 
-- [ ] **The directory is still named `playground-python` on disk.** The
-      contents were renamed to `climate-stack`; the folder was not, because
-      moving it out from under a running session breaks every open path.
-      `mv ~/dev/mortenoh/playground-python ~/dev/mortenoh/climate-stack`.
-      Nothing inside the repository depends on the name.
+- [x] **The directory was still named after the old repository on disk.** It
+      is now `climate-stack`, matching the contents. Nothing inside the
+      repository depended on the name: no lockfile, virtualenv, or config
+      recorded it, and every project still builds and imports from the new
+      path.
 - [ ] **No git remote is configured.** Every project page links to source with
       repository-relative paths, which resolve in an editor and would resolve
       on GitHub. They have nowhere to resolve to yet.
