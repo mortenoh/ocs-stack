@@ -1,0 +1,69 @@
+# Verification, run the same way it is run locally.
+#
+# The matrix is discovered rather than listed: scripts/verify.sh --list is the
+# single source of truth for what a project is, so adding one cannot leave it
+# silently untested here.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  discover:
+    name: discover projects
+    runs-on: ubuntu-latest
+    outputs:
+      projects: ${{ steps.list.outputs.projects }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: list
+        run: |
+          projects="$(./scripts/verify.sh --list | jq -R -s -c 'split("\n") | map(select(length > 0))')"
+          echo "projects=$projects" >> "$GITHUB_OUTPUT"
+          echo "discovered: $projects"
+
+  verify:
+    name: verify ${{ matrix.project }}
+    needs: discover
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project: ${{ fromJSON(needs.discover.outputs.projects) }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: ${{ matrix.project }}/uv.lock
+
+      # lint, both type checkers, tests, and every example. The examples are
+      # deterministic and offline by convention, and anything that wants a
+      # real service falls back and says what the fallback cannot show -- so
+      # a runner with no Docker daemon is a supported way to run them.
+      - run: ./scripts/verify.sh ${{ matrix.project }}
+
+  docs:
+    name: docs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      # Builds the site under --strict, checks every relative link, and
+      # enforces the per-example documentation standard.
+      - run: make docs-build
