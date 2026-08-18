@@ -64,8 +64,18 @@ Verification is not a clean type-check:
 ```bash
 make verify PROJECT=xarray   # lint, type-check, test, run every example
 make verify-all              # the whole repository
-make docs-build              # this site
+make docs-build              # this site, its links, and the docs standard
+make docs-check              # just the docs standard
 ```
+
+`make docs-check` enforces the rules this page states in prose, because a
+documentation lapse is invisible in a way a broken build is not — a page is
+never "broken", only quietly thinner than it promises to be. It checks that
+every example carries a What/Why/Run docstring, `# SECTION` banners and a
+summary; that every example has its own section in the project page of at
+least 80 lines; that the page links the source; and that the roadmap and the
+examples directory agree in both directions. It runs as part of
+`make docs-build`.
 
 `make verify` runs every example and reads its output, because compiling proves
 it builds, not that it works. Every number quoted in these pages came out of an

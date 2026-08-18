@@ -25,7 +25,7 @@ BOOK := uvx --quiet \
 	python
 
 .PHONY: help list verify verify-all docs docs-serve docs-build docs-links \
-	book pdf offline share clean
+	docs-check book pdf offline share clean
 
 # Port for `make share`; override with `make share PORT=9000`.
 PORT ?= 8000
@@ -60,9 +60,13 @@ docs-build: ## Build the documentation site into site/
 	@echo ">>> Building documentation site"
 	@$(MKDOCS) build
 	@$(MAKE) --no-print-directory docs-links
+	@$(MAKE) --no-print-directory docs-check
 
 docs-links: ## Check that every relative link in docs/ resolves
 	@./scripts/check-links.sh
+
+docs-check: ## Check every example against the documentation standard
+	@./scripts/check-docs.py
 
 docs: docs-serve
 
