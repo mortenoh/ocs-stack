@@ -91,6 +91,19 @@ it builds, not that it works. Every number quoted in these pages came out of an
 example that actually ran; timing-derived figures are marked as
 machine-dependent because they do not reproduce exactly.
 
+### Links to source
+
+The project pages link to example and library source with paths relative to
+the repository root, because that is how these files are usually read: in an
+editor, or as markdown on GitHub. The published site is the one place those
+paths cannot work — it contains `docs/` and nothing else, so a relative source
+link 404s there.
+
+`scripts/mkdocs_hooks.py` rewrites them to absolute GitHub URLs at build time.
+The markdown on disk stays relative, so `scripts/check-links.sh` can keep
+checking it against the filesystem, and the built site gets a URL that
+resolves. Links that stay inside `docs/` are left alone.
+
 ### Continuous integration
 
 Two workflows in `.github/workflows/`:

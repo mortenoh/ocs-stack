@@ -6,8 +6,8 @@ what is open across the collection rather than inside one project.
 
 ## Open from the review of 2026-08-17
 
-One item needs a decision that is not mine to make. The three documentation
-inconsistencies the review found are fixed, and the directory has been renamed.
+Everything from that review is now closed. What remains open across the
+collection is below.
 
 - [x] **The directory was still named after the old repository on disk.** It
       is now `ocs-stack`, matching the contents. One thing does record the
@@ -19,9 +19,15 @@ inconsistencies the review found are fixed, and the directory has been renamed.
       `rm -rf */.venv && uv sync` per project. Note that `uv run python` keeps
       working throughout, so an import check does not catch this and
       `make verify-all` is the test that does.
-- [ ] **No git remote is configured.** Every project page links to source with
-      repository-relative paths, which resolve in an editor and would resolve
-      on GitHub. They have nowhere to resolve to yet.
+- [x] **No git remote was configured.** The repository is now public at
+      <https://github.com/mortenoh/ocs-stack>, CI runs every project and the
+      documentation standard on each push, and the site is published to
+      <https://mortenoh.github.io/ocs-stack/>. Publishing exposed a defect the
+      local build could not: repository-relative source links resolve in an
+      editor and on GitHub, but the site contains `docs/` and nothing else, so
+      every one of them 404'd there. `scripts/mkdocs_hooks.py` now rewrites
+      them to absolute GitHub URLs at build time, leaving the markdown on disk
+      relative.
 - [x] **`dask-distributed` had no `Setup` section**, the only project page
       missing one. It now has a real one in the position `CLAUDE.md` requires,
       covering the two-step start, the fallback with the cluster down, and the
