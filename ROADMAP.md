@@ -28,6 +28,23 @@ inconsistencies the review found are fixed.
       Removed: the site has a sidebar and the offline book builds its own table
       of contents, so both lists were maintained by hand for no reader.
 
+## Known limit of the documentation check
+
+`make docs-check` enforces structure: template conformance, section depth,
+source links, roadmap agreement. It cannot tell whether a quoted output block
+is still true.
+
+Output quoted from examples is covered indirectly — `make verify-all` runs all
+86 and their output is read. Output belonging to the pages themselves, in the
+introduction and core-concepts sections, is not: those snippets are runnable
+but nothing runs them.
+
+- [ ] A harness that extracts every self-contained snippet from the project
+      pages, executes it in that project's environment, and diffs the result
+      against the quoted block. The August 2026 review verified this surface by
+      sample only — one xarray snippet, reproduced byte for byte including
+      float values and `nbytes` — which is evidence, not coverage.
+
 ## Groundwork laid, work not started
 
 Both extensions are planned for open-climate-service, and the projects here
