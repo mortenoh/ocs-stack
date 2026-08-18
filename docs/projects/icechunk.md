@@ -667,6 +667,10 @@ def read_dataset(
     if len(given) > 1:
         raise ValueError(f"give at most one of branch, snapshot_id, tag; got {', '.join(given)}")
 
+    for name in given:
+        if not (selectors[name] or "").strip():
+            raise ValueError(f"{name} was given as an empty string; omit it to read the main tip")
+
     if snapshot_id is not None:
         session = repo.readonly_session(snapshot_id=snapshot_id)
     elif tag is not None:
@@ -693,6 +697,16 @@ the conflict raises:
 ```pycon
 >>> read_dataset(repo, branch="main", tag="era5-2024q1-final")
 ValueError: give at most one of branch, snapshot_id, tag; got branch, tag
+```
+
+An empty selector is rejected for the same reason. `branch or "main"` would
+otherwise turn one into a silent read of the tip, and an empty string here is
+almost always an environment variable nobody set rather than a request for the
+default:
+
+```pycon
+>>> read_dataset(repo, branch=os.environ.get("ICECHUNK_BRANCH", ""))
+ValueError: branch was given as an empty string; omit it to read the main tip
 ```
 
 Passing nothing still reads the `main` tip, which is what every example does.

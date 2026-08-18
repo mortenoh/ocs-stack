@@ -92,12 +92,21 @@ def read_dataset(
         The dataset as of that point in history.
 
     Raises:
-        ValueError: If more than one of branch, snapshot_id, and tag is given.
+        ValueError: If more than one of branch, snapshot_id, and tag is given,
+            or if one of them is given as an empty string.
     """
     selectors = {"branch": branch, "snapshot_id": snapshot_id, "tag": tag}
     given = sorted(name for name, value in selectors.items() if value is not None)
     if len(given) > 1:
         raise ValueError(f"give at most one of branch, snapshot_id, tag; got {', '.join(given)}")
+
+    # An empty selector is almost always an unset environment variable rather
+    # than a request for the default, and `branch or "main"` below would turn
+    # it into a silent read of main -- the same wrong-history-looks-fine
+    # failure the check above exists to prevent.
+    for name in given:
+        if not (selectors[name] or "").strip():
+            raise ValueError(f"{name} was given as an empty string; omit it to read the main tip")
 
     if snapshot_id is not None:
         session = repo.readonly_session(snapshot_id=snapshot_id)

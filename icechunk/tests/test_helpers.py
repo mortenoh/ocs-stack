@@ -85,6 +85,15 @@ class TestRepository:
             with pytest.raises(ValueError, match="at most one of branch, snapshot_id, tag"):
                 read_dataset(repo, **selectors)
 
+    @pytest.mark.parametrize("selector", ["branch", "snapshot_id", "tag"])
+    @pytest.mark.parametrize("blank", ["", "   "])
+    def test_rejects_empty_selector(self, selector: str, blank: str):
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = open_repo(Path(tmp) / "store.icechunk")
+            write_dataset(repo, climate_dataset(days=2), "first")
+            with pytest.raises(ValueError, match="empty string"):
+                read_dataset(repo, **{selector: blank})
+
     def test_explicit_branch_still_reads(self):
         with tempfile.TemporaryDirectory() as tmp:
             repo = open_repo(Path(tmp) / "store.icechunk")

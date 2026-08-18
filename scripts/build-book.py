@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import argparse
 import html
+import os
 import re
 import sys
 from pathlib import Path
@@ -174,7 +175,17 @@ def rewrite_links(body: str, entry: NavEntry, by_path: dict[str, NavEntry]) -> s
 
 
 def namespace_ids(body: str, slug: str) -> str:
-    """Prefix every heading id on a page so ids stay unique across the book.
+    """Prefix every id on a page so ids stay unique across the book.
+
+    Every id, not only headings: the markdown extensions mint their own, and
+    they are per-page counters that collide the moment two pages use the same
+    feature. Two pages with one footnote each both emit ``fn:1`` and
+    ``fnref:1``, so every footnote link in the book would jump to the first
+    page's note. The same goes for ``__codelineno-`` anchors from
+    ``anchor_linenums`` and ``__tabbed_N_N`` from the tabbed extension.
+
+    :func:`rewrite_links` prefixes same-page ``href="#..."`` targets with the
+    same slug, so the two stay in step as long as both cover the same ids.
 
     Args:
         body: Rendered HTML for one page.
@@ -183,7 +194,7 @@ def namespace_ids(body: str, slug: str) -> str:
     Returns:
         The HTML with every ``id="x"`` rewritten to ``id="slug--x"``.
     """
-    return re.sub(r'(<h[1-6][^>]*\sid=")([^"]+)(")', rf"\1{slug}--\2\3", body)
+    return re.sub(r'(\sid=")([^"]+)(")', rf"\1{slug}--\2\3", body)
 
 
 def demote_headings(body: str) -> str:
@@ -382,7 +393,10 @@ def main() -> int:
 
     count = build(args.out)
     size_kb = args.out.stat().st_size / 1024
-    print(f"wrote {args.out.relative_to(ROOT)} -- {count} pages, {size_kb:.0f} KiB")
+    # relative_to raises for anything outside ROOT, which a caller-supplied
+    # --out very often is; os.path.relpath just walks up instead.
+    shown = os.path.relpath(args.out, ROOT)
+    print(f"wrote {shown} -- {count} pages, {size_kb:.0f} KiB")
     return 0
 
 
