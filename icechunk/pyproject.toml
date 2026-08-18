@@ -1,5 +1,5 @@
 [project]
-name = "climate-stack-icechunk"
+name = "ocs-stack-icechunk"
 version = "0.1.0"
 description = "Learning icechunk: versioned, transactional Zarr v3 storage"
 readme = "README.md"
@@ -29,7 +29,7 @@ requires = ["uv_build>=0.9.0,<0.13.0"]
 build-backend = "uv_build"
 
 [tool.uv.build-backend]
-module-name = "climate_stack_icechunk"
+module-name = "ocs_stack_icechunk"
 
 [tool.ruff]
 target-version = "py313"
@@ -56,7 +56,7 @@ norecursedirs = ["examples", ".git", ".venv", "__pycache__"]
 [tool.coverage.run]
 branch = true
 relative_files = true
-source = ["climate_stack_icechunk"]
+source = ["ocs_stack_icechunk"]
 
 [tool.coverage.report]
 exclude_also = ["if TYPE_CHECKING:"]

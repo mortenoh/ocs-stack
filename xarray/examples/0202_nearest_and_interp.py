@@ -14,7 +14,7 @@ Run: make run EXAMPLE=0202_nearest_and_interp
 
 import numpy as np
 
-from climate_stack_xarray import temperature_dataset
+from ocs_stack_xarray import temperature_dataset
 
 
 def main() -> None:

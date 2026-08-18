@@ -24,7 +24,7 @@ import pandas as pd
 import xarray as xr
 import zarr
 
-from climate_stack_climate_pipeline import (
+from ocs_stack_climate_pipeline import (
     bounding_box,
     climatological_normal,
     enumerate_periods,

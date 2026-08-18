@@ -17,7 +17,7 @@ import socket
 import time
 from collections import Counter
 
-from climate_stack_dask_distributed import connect, describe_workers
+from ocs_stack_dask_distributed import connect, describe_workers
 
 N_TASKS = 12
 

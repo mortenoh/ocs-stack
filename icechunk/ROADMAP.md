@@ -12,7 +12,7 @@ branches and tags name those points, and readers never see a half-written
 store. That last property is what makes it safe to append to a dataset that is
 simultaneously being served over HTTP.
 
-Helpers live in `src/climate_stack_icechunk/`: repository open, commit-and-
+Helpers live in `src/ocs_stack_icechunk/`: repository open, commit-and-
 write, read-at-a-point, history listing, and OCS-shaped synthetic data.
 
 ## Phase 1 — Repositories, sessions, commits

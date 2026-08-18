@@ -18,7 +18,7 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-from climate_stack_icechunk import (
+from ocs_stack_icechunk import (
     climate_dataset,
     describe_history,
     open_repo,

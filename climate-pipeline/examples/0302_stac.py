@@ -23,7 +23,7 @@ import icechunk
 import pandas as pd
 import xarray as xr
 
-from climate_stack_climate_pipeline import (
+from ocs_stack_climate_pipeline import (
     enumerate_periods,
     fetch_temperature,
     geozarr_attrs,

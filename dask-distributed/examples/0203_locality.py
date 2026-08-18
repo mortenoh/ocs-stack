@@ -17,7 +17,7 @@ from typing import Any
 
 import dask.array as da
 
-from climate_stack_dask_distributed import connect, describe_workers
+from ocs_stack_dask_distributed import connect, describe_workers
 
 
 def chunk_sum(array: Any) -> float:

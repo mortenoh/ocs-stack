@@ -17,7 +17,7 @@ import socket
 import time
 from typing import Any
 
-from climate_stack_dask_distributed import connect
+from ocs_stack_dask_distributed import connect
 
 # Module-level so every attempt on the same worker sees the same counter.
 _ATTEMPTS: dict[str, int] = {}
@@ -69,10 +69,10 @@ def flaky(key: str, fail_times: int) -> str:
         # getattr/setattr rather than attribute syntax: the Worker class has no
         # such attribute declared, and stashing state on it is the documented
         # way to keep per-worker state.
-        existing: dict[str, int] | None = getattr(worker, "_climate_stack_attempts", None)
+        existing: dict[str, int] | None = getattr(worker, "_ocs_stack_attempts", None)
         if existing is None:
             existing = {}
-            setattr(worker, "_climate_stack_attempts", existing)
+            setattr(worker, "_ocs_stack_attempts", existing)
         store = existing
 
     seen = store.get(key, 0) + 1

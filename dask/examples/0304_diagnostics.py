@@ -19,7 +19,7 @@ from typing import Any
 from dask.diagnostics.profile import Profiler, ResourceProfiler
 from dask.diagnostics.progress import ProgressBar
 
-from climate_stack_dask import chunk_report, random_field, task_count
+from ocs_stack_dask import chunk_report, random_field, task_count
 
 
 def key_prefix(key: Any) -> str:

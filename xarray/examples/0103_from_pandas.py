@@ -15,7 +15,7 @@ Run: make run EXAMPLE=0103_from_pandas
 import numpy as np
 import pandas as pd
 
-from climate_stack_xarray import temperature_dataset
+from ocs_stack_xarray import temperature_dataset
 
 
 def main() -> None:

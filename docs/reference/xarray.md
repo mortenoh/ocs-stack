@@ -1,3 +1,3 @@
 # xarray
 
-::: climate_stack_xarray.synthetic
+::: ocs_stack_xarray.synthetic

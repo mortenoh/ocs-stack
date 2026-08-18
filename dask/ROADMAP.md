@@ -7,7 +7,7 @@ dataframes, and dask-backed xarray are all front-ends that build graphs.
 OCS runs its openEO process graphs on dask (`openeo-processes-dask`) and
 writes dask-chunked xarray to zarr — phases 5 and 6 land exactly there.
 
-Shared helpers live in `src/climate_stack_dask/`: synthetic chunked arrays
+Shared helpers live in `src/ocs_stack_dask/`: synthetic chunked arrays
 and a chunk-layout reporter used across the examples.
 
 ## Phase 1 — Delayed and task graphs

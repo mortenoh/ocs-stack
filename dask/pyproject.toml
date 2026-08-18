@@ -1,5 +1,5 @@
 [project]
-name = "climate-stack-dask"
+name = "ocs-stack-dask"
 version = "0.1.0"
 description = "Learning dask: task graphs, arrays, schedulers, distributed, and the xarray bridge"
 readme = "README.md"
@@ -27,7 +27,7 @@ requires = ["uv_build>=0.9.0,<0.13.0"]
 build-backend = "uv_build"
 
 [tool.uv.build-backend]
-module-name = "climate_stack_dask"
+module-name = "ocs_stack_dask"
 
 [tool.ruff]
 target-version = "py313"
@@ -54,7 +54,7 @@ norecursedirs = ["examples", ".git", ".venv", "__pycache__"]
 [tool.coverage.run]
 branch = true
 relative_files = true
-source = ["climate_stack_dask"]
+source = ["ocs_stack_dask"]
 
 [tool.coverage.report]
 exclude_also = ["if TYPE_CHECKING:"]

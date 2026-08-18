@@ -1,5 +1,5 @@
 """Learning dask: shared helpers for chunked arrays and graph inspection."""
 
-from climate_stack_dask.helpers import chunk_report, random_field, task_count
+from ocs_stack_dask.helpers import chunk_report, random_field, task_count
 
 __all__ = ["chunk_report", "random_field", "task_count"]

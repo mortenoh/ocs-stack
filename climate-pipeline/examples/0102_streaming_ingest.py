@@ -18,8 +18,8 @@ from typing import Any
 import icechunk  # no type stubs; repository handles stay narrowly typed as Any
 import xarray as xr
 
-from climate_stack_climate_pipeline import enumerate_periods, fetch_temperature, ingest_period, store_path
-from climate_stack_climate_pipeline.sources import Period
+from ocs_stack_climate_pipeline import enumerate_periods, fetch_temperature, ingest_period, store_path
+from ocs_stack_climate_pipeline.sources import Period
 
 # Silence the Rust-side WARN chatter icechunk emits during ordinary appends.
 icechunk.set_logs_filter("error")

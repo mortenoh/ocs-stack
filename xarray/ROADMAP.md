@@ -6,7 +6,7 @@ uses it: every phase notes what it unlocks in that codebase. The destination
 is dask-backed lazy xarray over zarr stores — the follow-up projects
 `data/dask` and `data/icechunk` build on this one.
 
-Shared helpers live in `src/climate_stack_xarray/`: synthetic climate
+Shared helpers live in `src/ocs_stack_xarray/`: synthetic climate
 datasets shaped like OCS stores — dims `(time, y, x)`, CF-style attrs.
 
 ## Phase 1 — Anatomy and creation

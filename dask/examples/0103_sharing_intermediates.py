@@ -20,7 +20,7 @@ from typing import Any
 from dask.base import compute
 from dask.delayed import Delayed, delayed
 
-from climate_stack_dask import task_count
+from ocs_stack_dask import task_count
 
 EXPENSIVE_SECONDS = 0.3
 """Deterministic cost of the shared step, so the timing comparison is reliable."""

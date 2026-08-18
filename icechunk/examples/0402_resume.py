@@ -21,7 +21,7 @@ import numpy as np
 import pandas as pd
 import xarray as xr
 
-from climate_stack_icechunk import (
+from ocs_stack_icechunk import (
     climate_dataset,
     describe_history,
     open_repo,

@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from climate_stack_dask import chunk_report, random_field, task_count
+from ocs_stack_dask import chunk_report, random_field, task_count
 
 
 class TestRandomField:

@@ -20,7 +20,7 @@ from typing import Any
 import xarray as xr
 import zarr.errors
 
-from climate_stack_icechunk import climate_dataset, open_repo, quiet_icechunk_logs
+from ocs_stack_icechunk import climate_dataset, open_repo, quiet_icechunk_logs
 
 
 def peek(repo: Any, label: str) -> None:

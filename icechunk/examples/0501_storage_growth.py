@@ -20,7 +20,7 @@ from typing import Any
 import xarray as xr
 import zarr
 
-from climate_stack_icechunk import (
+from ocs_stack_icechunk import (
     climate_dataset,
     describe_history,
     open_repo,

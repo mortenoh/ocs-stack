@@ -20,7 +20,7 @@ import pandas as pd
 import xarray as xr
 from dask.array import Array as DaskArray
 
-from climate_stack_dask import chunk_report, random_field, task_count
+from ocs_stack_dask import chunk_report, random_field, task_count
 
 
 def make_field(days: int = 365) -> xr.DataArray:

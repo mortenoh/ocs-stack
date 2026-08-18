@@ -12,7 +12,7 @@ pair the wrong axes the way positional numpy broadcasting can.
 Run: make run EXAMPLE=0301_arithmetic_broadcasting
 """
 
-from climate_stack_xarray import temperature_dataset
+from ocs_stack_xarray import temperature_dataset
 
 
 def main() -> None:

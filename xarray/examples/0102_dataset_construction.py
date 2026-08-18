@@ -12,7 +12,7 @@ Run: make run EXAMPLE=0102_dataset_construction
 
 import xarray as xr
 
-from climate_stack_xarray import precipitation_dataset, temperature_dataset
+from ocs_stack_xarray import precipitation_dataset, temperature_dataset
 
 
 def main() -> None:

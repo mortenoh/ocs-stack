@@ -12,7 +12,7 @@ the code must make -- xarray will happily compute the wrong one.
 Run: make run EXAMPLE=0304_resample
 """
 
-from climate_stack_xarray import precipitation_dataset, temperature_dataset
+from ocs_stack_xarray import precipitation_dataset, temperature_dataset
 
 
 def main() -> None:

@@ -1,14 +1,18 @@
-# climate-stack
+# ocs-stack
+
+A companion piece to
+[open-climate-service](https://github.com/dhis2/open-climate-service) (OCS),
+and a testing ground for it. OCS is the real service; this is where its stack
+gets taken apart layer by layer, and where a change can be tried on something
+small before it is tried on something that matters.
 
 Self-contained tutorial projects, one per library. Every project builds and
 runs on its own: its own `pyproject.toml`, `.venv`, `uv.lock`, Makefile, and
 examples. There is no root package and no uv workspace.
 
-The current set exists for one reason: to learn the stack behind
-[open-climate-service](https://github.com/dhis2/open-climate-service) (OCS)
-from the bottom up, so that extending it — S3-backed icechunk, a distributed
-dask deployment — is a matter of applying things already understood rather
-than learning them under pressure.
+Learning the stack from the bottom up is the point: extending OCS — S3-backed
+icechunk, a distributed dask deployment — should be a matter of applying
+things already understood rather than learning them under pressure.
 
 ```bash
 make list                     # every project

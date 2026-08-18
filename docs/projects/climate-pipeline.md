@@ -25,7 +25,7 @@ source  ->  normalize  ->  icechunk store  ->  indices  ->  publish
 The unusual thing about this project, compared with the other four, is where
 the lesson lives. In `xarray` and `dask` the examples carry the teaching and
 there is barely a library to speak of. Here it is the reverse: the library in
-`src/climate_stack_climate_pipeline/` is a small but complete service, and the
+`src/ocs_stack_climate_pipeline/` is a small but complete service, and the
 examples are guided tours through it. Five modules, roughly 900 lines
 including docstrings, and every one of them exists because a real pipeline
 needs it:
@@ -686,10 +686,10 @@ library is a thin bag of helpers and the examples carry the teaching, in
 have read a climate service.
 
 The public surface is re-exported from the package root, so every example
-imports from `climate_stack_climate_pipeline` directly:
+imports from `ocs_stack_climate_pipeline` directly:
 
 ```python
-from climate_stack_climate_pipeline import (
+from ocs_stack_climate_pipeline import (
     Period,
     bounding_box,
     climatological_normal,
@@ -718,7 +718,7 @@ Twenty-one names. That is the whole service.
 
 ### `sources.py` — deliberately messy inputs
 
-Source: [`../../climate-pipeline/src/climate_stack_climate_pipeline/sources.py`](../../climate-pipeline/src/climate_stack_climate_pipeline/sources.py)
+Source: [`../../climate-pipeline/src/ocs_stack_climate_pipeline/sources.py`](../../climate-pipeline/src/ocs_stack_climate_pipeline/sources.py)
 
 **Responsibility.** Stand in for real upstream sources. Two things: enumerate
 the periods a source can supply, and produce one period's worth of data on
@@ -1002,7 +1002,7 @@ a heavy day's rain. Same value, 1000x apart.
 
 ### `normalize.py` — one convention, bought once
 
-Source: [`../../climate-pipeline/src/climate_stack_climate_pipeline/normalize.py`](../../climate-pipeline/src/climate_stack_climate_pipeline/normalize.py)
+Source: [`../../climate-pipeline/src/ocs_stack_climate_pipeline/normalize.py`](../../climate-pipeline/src/ocs_stack_climate_pipeline/normalize.py)
 
 **Responsibility.** Take whatever a source produced and return the service's
 canonical form: dims `(time, y, x)`, a north-up y axis, degC and mm, a sorted
@@ -1316,7 +1316,7 @@ Aliases work too:
 
 ### `ingest.py` — one period, one commit
 
-Source: [`../../climate-pipeline/src/climate_stack_climate_pipeline/ingest.py`](../../climate-pipeline/src/climate_stack_climate_pipeline/ingest.py)
+Source: [`../../climate-pipeline/src/ocs_stack_climate_pipeline/ingest.py`](../../climate-pipeline/src/ocs_stack_climate_pipeline/ingest.py)
 
 **Responsibility.** Move periods from a source into an icechunk store, one
 transaction each, skipping what is already there and surviving what fails.
@@ -1687,7 +1687,7 @@ metadata at this scale rather than by the arrays.
 
 ### `indices.py` — the products people actually ask for
 
-Source: [`../../climate-pipeline/src/climate_stack_climate_pipeline/indices.py`](../../climate-pipeline/src/climate_stack_climate_pipeline/indices.py)
+Source: [`../../climate-pipeline/src/ocs_stack_climate_pipeline/indices.py`](../../climate-pipeline/src/ocs_stack_climate_pipeline/indices.py)
 
 **Responsibility.** Turn the stored daily series into the derived quantities a
 user requests.
@@ -2070,7 +2070,7 @@ wants a specific day.
 
 ### `publish.py` — turning a store into a product
 
-Source: [`../../climate-pipeline/src/climate_stack_climate_pipeline/publish.py`](../../climate-pipeline/src/climate_stack_climate_pipeline/publish.py)
+Source: [`../../climate-pipeline/src/ocs_stack_climate_pipeline/publish.py`](../../climate-pipeline/src/ocs_stack_climate_pipeline/publish.py)
 
 **Responsibility.** Produce the metadata that lets somebody who has never seen
 this store place it on Earth and find it in a catalogue.
@@ -5282,7 +5282,7 @@ to being a real implementation rather than a model of one.
 Two things in this repository are deliberate re-implementations of OCS code,
 kept close to the original: the `_uniform_chunks` fix in
 `dask/examples/0601_zarr_legal_chunks.py`, and the open-or-create plus
-commit-and-append pattern in `icechunk/src/climate_stack_icechunk/helpers.py`. The
+commit-and-append pattern in `icechunk/src/ocs_stack_icechunk/helpers.py`. The
 `ingest_period` function here is the same pattern.
 
 **What is simplified.** Local filesystem storage only, which is also true of OCS

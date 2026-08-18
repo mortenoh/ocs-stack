@@ -10,10 +10,15 @@ One item needs a decision that is not mine to make. The three documentation
 inconsistencies the review found are fixed, and the directory has been renamed.
 
 - [x] **The directory was still named after the old repository on disk.** It
-      is now `climate-stack`, matching the contents. Nothing inside the
-      repository depended on the name: no lockfile, virtualenv, or config
-      recorded it, and every project still builds and imports from the new
-      path.
+      is now `ocs-stack`, matching the contents. One thing does record the
+      absolute path and has to be rebuilt after any such move: the shebang of
+      every console script in a `.venv` (`mypy`, `pyright`, `ruff`, `pytest`).
+      `pyvenv.cfg` and `uv.lock` do not, and `uv sync` considers a moved
+      environment up to date, so the failure surfaces as
+      `Failed to spawn: mypy` rather than as anything about paths. The fix is
+      `rm -rf */.venv && uv sync` per project. Note that `uv run python` keeps
+      working throughout, so an import check does not catch this and
+      `make verify-all` is the test that does.
 - [ ] **No git remote is configured.** Every project page links to source with
       repository-relative paths, which resolve in an editor and would resolve
       on GitHub. They have nowhere to resolve to yet.

@@ -16,7 +16,7 @@ import time
 
 import numpy as np
 
-from climate_stack_dask_distributed import connect
+from ocs_stack_dask_distributed import connect
 
 N_TASKS = 12
 ROWS = 800

@@ -12,8 +12,8 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-INPUT="${1:-$ROOT/dist/climate-stack.html}"
-OUTPUT="${2:-$ROOT/dist/climate-stack.pdf}"
+INPUT="${1:-$ROOT/dist/ocs-stack.html}"
+OUTPUT="${2:-$ROOT/dist/ocs-stack.pdf}"
 
 if [ ! -f "$INPUT" ]; then
   echo "no book at $INPUT -- run: make book" >&2
@@ -42,7 +42,7 @@ No Chrome or Chromium found, so the PDF cannot be rendered here.
 
 The book itself is already built and is the better artefact on a phone anyway:
 
-    open dist/climate-stack.html
+    open dist/ocs-stack.html
 
 To get a PDF from it by hand: open that file in any browser and print to PDF.
 MSG

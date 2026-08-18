@@ -1,6 +1,6 @@
 """Learning icechunk: versioned, transactional Zarr v3 storage."""
 
-from climate_stack_icechunk.helpers import (
+from ocs_stack_icechunk.helpers import (
     climate_dataset,
     describe_history,
     open_repo,

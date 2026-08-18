@@ -18,7 +18,7 @@ from time import perf_counter
 
 import numpy as np
 
-from climate_stack_dask import chunk_report, random_field, task_count
+from ocs_stack_dask import chunk_report, random_field, task_count
 
 
 def main() -> None:

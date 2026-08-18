@@ -21,7 +21,7 @@ from dask.core import get_dependencies
 from dask.delayed import Delayed, delayed
 from dask.typing import Key
 
-from climate_stack_dask import chunk_report, random_field, task_count
+from ocs_stack_dask import chunk_report, random_field, task_count
 
 
 def inc(x: int) -> int:

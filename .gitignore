@@ -21,9 +21,6 @@ dist/
 coverage.xml
 htmlcov/
 
-# mkdocs build output (per project)
-site/
-
 # Databases
 *.db
 *.sqlite

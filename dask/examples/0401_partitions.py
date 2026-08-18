@@ -15,7 +15,7 @@ import dask.dataframe as dd
 import numpy as np
 import pandas as pd
 
-from climate_stack_dask.helpers import task_count
+from ocs_stack_dask.helpers import task_count
 
 N_ROWS = 100_000
 N_STATIONS = 25

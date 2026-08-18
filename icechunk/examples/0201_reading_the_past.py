@@ -19,7 +19,7 @@ from typing import Any
 
 import numpy as np
 
-from climate_stack_icechunk import (
+from ocs_stack_icechunk import (
     climate_dataset,
     open_repo,
     quiet_icechunk_logs,

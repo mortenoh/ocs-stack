@@ -16,7 +16,7 @@ Run: make run EXAMPLE=0403_scaling
 import time
 from typing import Any
 
-from climate_stack_dask_distributed import connect
+from ocs_stack_dask_distributed import connect
 
 N_TASKS = 24
 

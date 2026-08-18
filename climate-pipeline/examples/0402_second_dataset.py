@@ -24,7 +24,7 @@ import numpy as np
 import pandas as pd
 import xarray as xr
 
-from climate_stack_climate_pipeline import (
+from ocs_stack_climate_pipeline import (
     Period,
     enumerate_periods,
     fetch_precipitation,

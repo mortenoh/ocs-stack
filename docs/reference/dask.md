@@ -1,3 +1,3 @@
 # dask
 
-::: climate_stack_dask.helpers
+::: ocs_stack_dask.helpers

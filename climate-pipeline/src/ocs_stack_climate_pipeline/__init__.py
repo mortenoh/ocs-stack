@@ -1,6 +1,6 @@
 """A miniature climate service: ingest, store, derive, publish."""
 
-from climate_stack_climate_pipeline.indices import (
+from ocs_stack_climate_pipeline.indices import (
     climatological_normal,
     hot_days,
     monthly_anomaly,
@@ -9,22 +9,22 @@ from climate_stack_climate_pipeline.indices import (
     spi_like,
     wet_days,
 )
-from climate_stack_climate_pipeline.ingest import (
+from ocs_stack_climate_pipeline.ingest import (
     IngestReport,
     committed_periods,
     ingest,
     ingest_period,
     store_path,
 )
-from climate_stack_climate_pipeline.normalize import normalize
-from climate_stack_climate_pipeline.publish import (
+from ocs_stack_climate_pipeline.normalize import normalize
+from ocs_stack_climate_pipeline.publish import (
     bounding_box,
     geozarr_attrs,
     grid_transform,
     stac_collection,
     temporal_extent,
 )
-from climate_stack_climate_pipeline.sources import (
+from ocs_stack_climate_pipeline.sources import (
     Period,
     enumerate_periods,
     fetch_precipitation,

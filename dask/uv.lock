@@ -902,7 +902,7 @@ wheels = [
 ]
 
 [[package]]
-name = "climate-stack-dask"
+name = "ocs-stack-dask"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [

@@ -21,7 +21,7 @@ import dask.array as da
 import numpy as np
 from numpy.lib.stride_tricks import sliding_window_view
 
-from climate_stack_dask import chunk_report, random_field, task_count
+from ocs_stack_dask import chunk_report, random_field, task_count
 
 
 def normalize_block(block: np.ndarray) -> np.ndarray:

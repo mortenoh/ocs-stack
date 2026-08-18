@@ -3,7 +3,7 @@
 Guidance for Claude Code when working anywhere in this repository. This is the
 only `CLAUDE.md` in the repo.
 
-This is `climate-stack`: self-contained tutorial projects, one per layer of the
+This is `ocs-stack`: self-contained tutorial projects, one per layer of the
 climate data stack — xarray, dask, dask.distributed, icechunk, and a pipeline
 capstone — sitting directly at the repository root as `<project>/`. There is
 no root `pyproject.toml` and no uv workspace — every project has its own
@@ -21,7 +21,7 @@ added a category decision per project and expressed nothing that `docs/` does
 not say better in prose. Do not reintroduce them without a real reason.
 
 Package names are prefixed but otherwise flat: the `xarray` project is
-distribution `climate-stack-xarray`, module `climate_stack_xarray`. The prefix is
+distribution `ocs-stack-xarray`, module `ocs_stack_xarray`. The prefix is
 required — a project studying `polars` cannot have a module named `polars`
 while depending on it.
 
@@ -39,7 +39,7 @@ one mkdocs site from the root `mkdocs.yml`. Projects do NOT have their own
 - Write markdown that reads well as a plain file, not only when rendered.
 
 `make offline` at the root renders the same pages into one self-contained
-`dist/climate-stack.html` plus a PDF, and `make share` serves the site over
+`dist/ocs-stack.html` plus a PDF, and `make share` serves the site over
 Tailscale. `scripts/build-book.py` reads its page list from the `nav` in
 `mkdocs.yml`, so adding a page to the nav is enough — do not give the book its
 own list.
@@ -79,7 +79,7 @@ page in `docs/projects/` and `docs/reference/`.
 ## Per-project template (from chapkit)
 
 - Python 3.13 (`.python-version`), `uv` for everything, `uv_build` backend,
-  src layout: `src/climate_stack_<name>/`.
+  src layout: `src/ocs_stack_<name>/`.
 - ruff: `target-version = "py313"`, `line-length = 120`, select
   `E, W, F, I, D`, google docstring convention, per-file ignores as in the
   starter project.

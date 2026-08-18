@@ -872,7 +872,7 @@ wheels = [
 ]
 
 [[package]]
-name = "climate-stack-xarray"
+name = "ocs-stack-xarray"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [

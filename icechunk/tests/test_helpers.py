@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from climate_stack_icechunk import (
+from ocs_stack_icechunk import (
     climate_dataset,
     describe_history,
     open_repo,

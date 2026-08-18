@@ -20,7 +20,7 @@ import numpy as np
 import pandas as pd
 import xarray as xr
 
-from climate_stack_dask import random_field, task_count
+from ocs_stack_dask import random_field, task_count
 
 
 def make_field(days: int = 365) -> xr.DataArray:

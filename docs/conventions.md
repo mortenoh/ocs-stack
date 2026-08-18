@@ -8,7 +8,7 @@ projects, groups added a category decision per project and bought nothing that
 this documentation does not express better in prose.
 
 Package names are prefixed but otherwise flat: the `xarray` project is
-distribution `climate-stack-xarray`, module `climate_stack_xarray`. The prefix is
+distribution `ocs-stack-xarray`, module `ocs_stack_xarray`. The prefix is
 load-bearing — a project studying `polars` cannot have a module named `polars`
 while depending on it.
 
@@ -91,6 +91,24 @@ it builds, not that it works. Every number quoted in these pages came out of an
 example that actually ran; timing-derived figures are marked as
 machine-dependent because they do not reproduce exactly.
 
+### Continuous integration
+
+Two workflows in `.github/workflows/`:
+
+- `ci.yml` runs on every push and pull request. A `discover` job asks
+  `scripts/verify.sh --list` what the projects are and feeds that into a
+  matrix, so adding a project cannot leave it silently untested — the same
+  reasoning as the site-wiring check above. Each project then runs
+  `scripts/verify.sh <project>`: lint, both type checkers, tests, and every
+  example. A separate job runs `make docs-build`.
+- `docs.yml` publishes the site to GitHub Pages on every push to `main`. It
+  builds with `make docs-build`, the same target CI runs, so a page that fails
+  the documentation standard is never published.
+
+The runners have no Docker daemon, which is a supported way to run this: every
+example that wants a real service falls back and prints what the fallback
+cannot show.
+
 ## Documentation
 
 Documentation is centralised in `docs/` at the repository root and built as one
@@ -109,11 +127,11 @@ project's `src/` directory, and `make docs-build` runs the whole thing through
 The site is the right shape at a desk and the wrong shape on a phone with no
 signal. `make offline` produces the other shape:
 
-- `dist/climate-stack.html` — every page in nav order in one self-contained
+- `dist/ocs-stack.html` — every page in nav order in one self-contained
   file. No assets, no network, no sidebar; cross-page links become anchors
   within the document, and links to source outside `docs/` become the path in
   monospace, since a standalone file cannot follow them.
-- `dist/climate-stack.pdf` — the same file printed by headless Chrome, about
+- `dist/ocs-stack.pdf` — the same file printed by headless Chrome, about
   450 A4 pages.
 
 `scripts/build-book.py` reads the nav out of `mkdocs.yml` rather than keeping

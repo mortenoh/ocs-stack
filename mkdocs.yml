@@ -1,4 +1,4 @@
-site_name: climate-stack
+site_name: ocs-stack
 site_description: "Learning the xarray, dask, and icechunk stack behind open-climate-service"
 
 theme:

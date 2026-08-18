@@ -18,7 +18,7 @@ import time
 import numpy as np
 import xarray as xr
 
-from climate_stack_xarray import temperature_dataset
+from ocs_stack_xarray import temperature_dataset
 
 
 def p90_along_last_axis(values: np.ndarray) -> np.ndarray:

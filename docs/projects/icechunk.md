@@ -510,7 +510,7 @@ The timing there is machine-dependent, like every timing in this page.
 
 ### The helpers
 
-`src/climate_stack_icechunk/helpers.py` holds six functions, re-exported from the
+`src/ocs_stack_icechunk/helpers.py` holds six functions, re-exported from the
 package root. They exist so the examples can say what they mean without
 repeating six lines of session boilerplate each time, and two of them are
 deliberate re-implementations of open-climate-service code kept close to the
@@ -4485,7 +4485,7 @@ measured rather than assumed:
   shared-path constraint forces the move before the concurrency one does, and a
   decision table you can read your own deployment off.
 - **[reference/icechunk.md](../reference/icechunk.md)** — the generated API
-  reference for `climate_stack_icechunk.helpers`, with signatures and full
+  reference for `ocs_stack_icechunk.helpers`, with signatures and full
   docstrings for `open_repo`, `write_dataset`, `read_dataset`,
   `describe_history`, `climate_dataset`, and `quiet_icechunk_logs`.
 - **[Open Climate Service](../open-climate-service.md)** — the mapping across all

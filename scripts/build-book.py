@@ -11,7 +11,7 @@ drift, converts each page with the same markdown extensions the site uses, and
 resolves the cross-page links into intra-document anchors.
 
 Usage:
-    scripts/build-book.py [--out dist/climate-stack.html]
+    scripts/build-book.py [--out dist/ocs-stack.html]
 
 Run it through ``make book`` (or ``make pdf``), which supplies the toolchain
 via ``uvx`` -- there is no root virtualenv and this script needs none.
@@ -353,12 +353,12 @@ def build(out_path: Path) -> int:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>climate-stack</title>
+<title>ocs-stack</title>
 <style>{CSS}</style>
 </head>
 <body>
 <header class="cover">
-<h1>climate-stack</h1>
+<h1>ocs-stack</h1>
 <p class="sub">xarray, dask, dask.distributed, icechunk, and a climate pipeline &mdash;
 the whole documentation set as one offline page.</p>
 </header>
@@ -386,8 +386,8 @@ def main() -> int:
     parser.add_argument(
         "--out",
         type=Path,
-        default=ROOT / "dist" / "climate-stack.html",
-        help="output path (default: dist/climate-stack.html)",
+        default=ROOT / "dist" / "ocs-stack.html",
+        help="output path (default: dist/ocs-stack.html)",
     )
     args = parser.parse_args()
 

@@ -83,14 +83,14 @@ book: ## Render all docs as one self-contained HTML file in dist/
 	@echo ">>> Building the offline book"
 	@$(BOOK) scripts/build-book.py
 
-pdf: book ## Print the book to dist/climate-stack.pdf (needs Chrome or Chromium)
+pdf: book ## Print the book to dist/ocs-stack.pdf (needs Chrome or Chromium)
 	@./scripts/build-pdf.sh
 
 offline: pdf ## Build both the single-file book and the PDF
 	@echo
-	@echo "For a phone, AirDrop or copy dist/climate-stack.html -- it works offline,"
+	@echo "For a phone, AirDrop or copy dist/ocs-stack.html -- it works offline,"
 	@echo "reflows to the screen, and follows the system light/dark setting."
-	@echo "dist/climate-stack.pdf is the same content paginated for A4."
+	@echo "dist/ocs-stack.pdf is the same content paginated for A4."
 
 share: docs-build ## Serve the site to your own devices over Tailscale (tailnet only)
 	@./scripts/serve-tailscale.sh $(PORT)

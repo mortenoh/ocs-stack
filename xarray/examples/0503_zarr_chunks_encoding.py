@@ -18,7 +18,7 @@ import tempfile
 
 import xarray as xr
 
-from climate_stack_xarray import temperature_dataset
+from ocs_stack_xarray import temperature_dataset
 
 
 def count_chunk_files(store: str, var: str) -> int:

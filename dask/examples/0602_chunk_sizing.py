@@ -17,7 +17,7 @@ import time
 
 import dask.array as da
 
-from climate_stack_dask.helpers import chunk_report, random_field, task_count
+from ocs_stack_dask.helpers import chunk_report, random_field, task_count
 
 
 def timed_compute(expr: da.Array) -> float:

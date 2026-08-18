@@ -20,7 +20,7 @@ because OCS depends on it.
 Two things here are deliberate re-implementations of OCS code, kept close to
 the original: the `_uniform_chunks` fix in
 `dask/examples/0601_zarr_legal_chunks.py`, and the open-or-create plus
-commit-and-append pattern in `icechunk/src/climate_stack_icechunk/helpers.py`.
+commit-and-append pattern in `icechunk/src/ocs_stack_icechunk/helpers.py`.
 
 The [climate-pipeline](projects/climate-pipeline.md) project is the whole shape in miniature — a
 messy source normalized, ingested as one commit per period, derived into

@@ -23,7 +23,7 @@ import xarray as xr
 # dask.compute is public API, but dask's __init__ re-export is invisible to pyright; import from dask.base.
 from dask.base import compute as dask_compute
 
-from climate_stack_dask.helpers import chunk_report, random_field, task_count
+from ocs_stack_dask.helpers import chunk_report, random_field, task_count
 
 
 def timed(fn: Callable[[], object]) -> float:
