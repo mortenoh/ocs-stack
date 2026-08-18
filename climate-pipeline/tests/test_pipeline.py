@@ -37,6 +37,17 @@ def make_repo(tmp: str, dataset_id: str = "temperature"):
     return icechunk.Repository.create(icechunk.local_filesystem_storage(str(path)))
 
 
+class TestSources:
+    def test_enumerates_chronologically(self):
+        periods = enumerate_periods(2024, months=12)
+        assert [p.period_id for p in periods] == [f"2024-{m:02d}" for m in range(1, 13)]
+
+    @pytest.mark.parametrize("months", [0, -1, 13, 100])
+    def test_rejects_months_outside_the_year(self, months: int):
+        with pytest.raises(ValueError, match="between 1 and 12"):
+            enumerate_periods(2024, months=months)
+
+
 class TestNormalize:
     def test_renames_and_orients(self):
         raw = fetch_temperature(enumerate_periods(2024, 1)[0], ny=6, nx=6)
@@ -108,6 +119,11 @@ class TestIngest:
     def test_committed_periods_empty_for_new_repo(self):
         with tempfile.TemporaryDirectory() as tmp:
             assert committed_periods(make_repo(tmp)) == set()
+
+    def test_rejects_unsupported_period_type(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            with pytest.raises(ValueError, match="unsupported period_type"):
+                committed_periods(make_repo(tmp), period_type="week")
 
     def test_failed_period_does_not_stop_the_run(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -186,6 +202,10 @@ class TestPublish:
         start, end = temporal_extent(dataset)
         assert start.startswith("2024-01-01")
         assert end.endswith("Z")
+
+    def test_temporal_extent_needs_a_time_axis(self, dataset: xr.Dataset):
+        with pytest.raises(ValueError, match="no time coordinate"):
+            temporal_extent(dataset.isel(time=0, drop=True))
 
     def test_stac_collection_shape(self, dataset: xr.Dataset):
         collection = stac_collection(

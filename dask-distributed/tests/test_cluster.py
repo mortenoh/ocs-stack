@@ -2,7 +2,7 @@ import socket
 
 import pytest
 
-from climate_stack_dask_distributed import ClusterSession, scheduler_reachable
+from climate_stack_dask_distributed import ClusterSession, connect, scheduler_reachable, wait_for_scheduler
 from climate_stack_dask_distributed.cluster import _split_address
 
 
@@ -33,6 +33,23 @@ class TestSchedulerReachable:
             sock.listen(1)
             port = sock.getsockname()[1]
             assert scheduler_reachable(f"tcp://127.0.0.1:{port}", timeout=1.0) is True
+
+
+class TestWaitForScheduler:
+    def test_times_out_when_nothing_answers(self):
+        # A zero timeout means the loop body never runs, so this is the
+        # give-up path on its own, without a wall-clock wait.
+        with pytest.raises(TimeoutError, match="no scheduler answered"):
+            wait_for_scheduler("tcp://127.0.0.1:1", timeout=0.0)
+
+
+class TestConnectWithoutFallback:
+    def test_refuses_to_substitute_a_local_cluster(self):
+        # allow_fallback=False is for examples that only mean something
+        # against real containers; they must fail loudly, not quietly run
+        # in-process and look like they passed.
+        with pytest.raises(ConnectionError, match="make up"):
+            connect("tcp://127.0.0.1:1", allow_fallback=False)
 
 
 class TestClusterSession:
